@@ -1,9 +1,7 @@
 package game.test.renderer;
 
-import game.engine.appearance.Material;
 import game.engine.appearance.Shader;
 import game.engine.core.Camera;
-import game.engine.core.scenes.Scene;
 import game.engine.gl.GLUtils;
 import game.engine.rendering.Renderer;
 import game.test.entities.TestEntity;

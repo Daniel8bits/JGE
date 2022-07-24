@@ -1,7 +1,5 @@
 package game.engine.core.database;
 
-import lombok.Getter;
-
 import java.util.HashMap;
 
 public final class ResourceDatabaseCore {

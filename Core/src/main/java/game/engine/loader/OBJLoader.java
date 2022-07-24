@@ -8,7 +8,6 @@ import game.engine.buffer.VAO;
 import game.engine.buffer.VBO;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

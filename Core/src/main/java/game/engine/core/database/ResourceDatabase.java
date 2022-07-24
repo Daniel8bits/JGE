@@ -2,8 +2,6 @@ package game.engine.core.database;
 
 import game.engine.appearance.Material;
 import game.engine.appearance.Shader;
-import game.engine.buffer.VAO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

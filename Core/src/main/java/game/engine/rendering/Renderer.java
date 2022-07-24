@@ -1,11 +1,9 @@
 package game.engine.rendering;
 
 import game.engine.appearance.Material;
-import game.engine.appearance.Shader;
 import game.engine.core.Camera;
 import game.engine.core.entities.Entity;
 import game.engine.core.scenes.Scene;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

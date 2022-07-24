@@ -1,14 +1,11 @@
 package game.engine;
 
-import game.engine.buffer.VAO;
-import game.engine.loader.OBJLoader;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
-import org.lwjgl.util.tinyfd.TinyFileDialogs;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;

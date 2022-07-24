@@ -1,7 +1,6 @@
 package game.engine.buffer;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL15;
 

@@ -10,7 +10,6 @@ import game.engine.core.WindowManager;
 import game.engine.core.database.ResourceDatabase;
 import game.engine.core.scenes.Scene;
 import game.engine.loader.OBJLoader;
-import game.engine.utils.FileUtils;
 import game.test.entities.TestEntity;
 import game.test.entities.ViewportCameraEntity;
 import game.test.renderer.TestRenderer;
@@ -27,9 +26,7 @@ public class GameTest extends EngineMain {
         ResourceDatabase.getVAOCollection()
                 .register(new OBJLoader().load(vaoPath))
                 .stream()
-                .forEach(vao -> {
-                    ((VAO) vao).create();
-                });
+                .forEach(vao -> ((VAO) vao).create());
 
         Shader testShader = new Shader(
                 "test-shader",
@@ -42,9 +39,7 @@ public class GameTest extends EngineMain {
         ResourceDatabase.getMaterialCollection()
                 .register(new DefaultMaterial("test-material", testShader))
                 .stream()
-                .forEach(material -> {
-                    ((Material) material).create();
-                });
+                .forEach(material -> ((Material) material).create());
 
         TestRenderer renderer = new TestRenderer("test-renderer", null);
 
@@ -84,9 +79,7 @@ public class GameTest extends EngineMain {
     @Override
     public void finish() {
         ResourceDatabase.getShaderCollection().stream()
-                .forEach(shader -> {
-                    ((Shader) shader).destroy();
-                });
+                .forEach(shader -> ((Shader) shader).destroy());
     }
 
     public static void main(String[] args) {
