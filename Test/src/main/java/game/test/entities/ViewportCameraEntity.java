@@ -1,10 +1,10 @@
 package game.test.entities;
 
-import game.engine.core.Camera;
-import game.engine.core.InputManager;
-import game.engine.core.entities.Entity;
-import game.engine.core.scenes.Scene;
-import game.engine.rendering.Renderer;
+import game.engine.core.management.Camera;
+import game.engine.core.management.InputManager;
+import game.engine.core.management.entities.Entity;
+import game.engine.core.management.scenes.Scene;
+import game.engine.core.rendering.Renderer;
 import lombok.Getter;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;

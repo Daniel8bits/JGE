@@ -1,9 +1,9 @@
 package game.test.renderer;
 
-import game.engine.appearance.Shader;
-import game.engine.core.Camera;
-import game.engine.gl.GLUtils;
-import game.engine.rendering.Renderer;
+import game.engine.core.appearance.Shader;
+import game.engine.core.management.Camera;
+import game.engine.core.gl.GLUtils;
+import game.engine.core.rendering.Renderer;
 import game.test.entities.TestEntity;
 import org.joml.Matrix4f;
 

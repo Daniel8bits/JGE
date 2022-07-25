@@ -1,11 +1,11 @@
 package game.test.entities;
 
-import game.engine.appearance.Material;
-import game.engine.buffer.VAO;
-import game.engine.core.database.ResourceDatabase;
-import game.engine.core.entities.Entity;
-import game.engine.core.scenes.Scene;
-import game.engine.rendering.Renderer;
+import game.engine.core.appearance.Material;
+import game.engine.core.buffer.VAO;
+import game.engine.core.management.database.ResourceDatabase;
+import game.engine.core.management.entities.Entity;
+import game.engine.core.management.scenes.Scene;
+import game.engine.core.rendering.Renderer;
 
 public class TestEntity extends Entity {
 

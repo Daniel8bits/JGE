@@ -4,48 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="added module organisation">
-      <change afterPath="$PROJECT_DIR$/Core/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/pom.xml" afterDir="false" />
+    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="added module organisation&#10;added VirtualDOM system">
+      <change afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/scenes/ISceneCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/scenes/IScenePredicate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-AMETH/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/VirtualDOM.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/VirtualDOMFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMJButtonElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMJComboBoxElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMJPanelElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMJTextFieldElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMDocument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMHeader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMProperty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/IManageableNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/parser/XMLParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/test/UITest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/resources/it.is.just.a.test/TheTest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SCARLET/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-TOPAZ/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-ZMARAGDOS/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/GameEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/DefaultMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/appearance/DefaultMaterial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/appearance/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/appearance/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/buffer/VAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/buffer/VAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/buffer/VBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/buffer/VBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/EngineCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/EngineLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/EngineMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/IGBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/IGBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/InputManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/WindowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/WindowManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/IResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/database/IResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/database/ResourceCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/database/ResourceDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceDatabaseCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/database/ResourceDatabaseCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/ISceneCallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/ISceneManagerCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/scenes/ISceneManagerCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/IScenePredicate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/scenes/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/management/scenes/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/gl/GLUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/gl/GLUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/loader/OBJLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/loader/OBJLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/maths/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/maths/Transform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/maths/TransformStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/maths/TransformStruct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/IRenderStrategyCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/rendering/IRenderStrategyCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/RenderStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/rendering/RenderStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/rendering/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/game/engine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-ADAMAS/src/main/java/game/engine/core/utils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/src/main/java/game/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/TestEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/TestEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/ViewportCameraEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/ViewportCameraEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/src/main/java/game/test/renderer/TestRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/renderer/TestRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/GameEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/appearance/DefaultMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/DefaultMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/appearance/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/appearance/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/appearance/Shader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/buffer/VAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/buffer/VAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/buffer/VBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/buffer/VBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/EngineCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/EngineLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/EngineMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/EngineMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/IGBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/IGBuffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/InputManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/WindowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/WindowManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/database/IResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/IResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/database/ResourceCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/database/ResourceDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/database/ResourceDatabaseCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/database/ResourceDatabaseCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/entities/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/scenes/ISceneCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/ISceneCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/scenes/ISceneManagerCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/ISceneManagerCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/scenes/IScenePredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/IScenePredicate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/core/scenes/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/core/scenes/SceneManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/gl/GLUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/gl/GLUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/loader/OBJLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/loader/OBJLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/maths/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/maths/Transform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/maths/TransformStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/maths/TransformStruct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/rendering/IRenderStrategyCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/IRenderStrategyCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/rendering/RenderStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/RenderStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/rendering/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/rendering/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/engine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/game/engine/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/test/entities/TestEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/TestEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/test/entities/ViewportCameraEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/entities/ViewportCameraEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/test/renderer/TestRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/java/game/test/renderer/TestRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/shaders/test.frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/resources/test/shaders/test.frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/shaders/test.vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/Test/src/main/resources/test/shaders/test.vert.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,10 +109,23 @@
       <recent name="$PROJECT_DIR$/Test/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JGE">
-    <configuration name="JGE" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="game.test.GameTest" />
-      <module name="Test" />
+  <component name="RunManager" selected="Application.Gallant">
+    <configuration name="Gallant" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="game.engine.ui.test.UITest" />
+      <module name="Gallant-SAPPHIR" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Gallant" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Gallant" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,7 +154,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.JGE" />
+      <item itemvalue="Application.Gallant" />
       <item itemvalue="Maven.JGE" />
     </list>
   </component>
@@ -147,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658123216702</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added module organisation">
+      <created>1658643850129</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1658643850129</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +205,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="engine start up" />
     <MESSAGE value="added module organisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added module organisation" />
+    <MESSAGE value="added module organisation&#10;added VirtualDOM system" />
+    <option name="LAST_COMMIT_MESSAGE" value="added module organisation&#10;added VirtualDOM system" />
   </component>
 </project>

@@ -1,15 +1,15 @@
 package game.test;
 
-import game.engine.appearance.DefaultMaterial;
-import game.engine.appearance.Material;
-import game.engine.appearance.Shader;
-import game.engine.buffer.VAO;
-import game.engine.core.EngineCore;
-import game.engine.core.EngineMain;
-import game.engine.core.WindowManager;
-import game.engine.core.database.ResourceDatabase;
-import game.engine.core.scenes.Scene;
-import game.engine.loader.OBJLoader;
+import game.engine.core.appearance.DefaultMaterial;
+import game.engine.core.appearance.Material;
+import game.engine.core.appearance.Shader;
+import game.engine.core.buffer.VAO;
+import game.engine.core.management.EngineCore;
+import game.engine.core.management.EngineMain;
+import game.engine.core.management.WindowManager;
+import game.engine.core.management.database.ResourceDatabase;
+import game.engine.core.management.scenes.Scene;
+import game.engine.core.loader.OBJLoader;
 import game.test.entities.TestEntity;
 import game.test.entities.ViewportCameraEntity;
 import game.test.renderer.TestRenderer;
