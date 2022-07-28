@@ -1,0 +1,33 @@
+package game.engine.ui.events;
+
+public enum EventType {
+    ACTION,
+    CHANGE,
+    CLOSE,
+    CONTEXT_MENU,
+    DRAG_ENTER,
+    DRAG_LEAVE,
+    DRAG_MOVE,
+    DROP,
+    ENTER,
+    FOCUS_IN,
+    FOCUS_OUT,
+    HIDE,
+    INPUT_METHOD,
+    KEY_PRESS,
+    KEY_RELEASE,
+    LEAVE,
+    MOUSE_DOUBLE_CLICK,
+    MOUSE_MOVE,
+    MOUSE_PRESS,
+    MOUSE_RELEASE,
+    MOVE,
+    PAINT,
+    RESIZE,
+    SHOW,
+    TABLET,
+    WHEEL,
+    CHILD,
+    CUSTOM,
+    TIMER;
+}

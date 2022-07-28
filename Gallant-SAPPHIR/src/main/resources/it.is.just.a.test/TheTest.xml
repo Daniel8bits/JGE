@@ -4,8 +4,8 @@
         <title> Isso é um teste </title>
     </head>
     <body>
-        <jpanel>
-
-        </jpanel>
+        <qframe>
+            <qpushbutton> Click here </qpushbutton>
+        </qframe>
     </body>
 </document>

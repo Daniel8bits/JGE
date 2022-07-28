@@ -1,11 +1,16 @@
 package game.engine.ui.dom.nodes;
 
+import game.engine.ui.layout.DOMLayout;
+import io.qt.gui.QScreen;
+import io.qt.gui.QWindow;
+import io.qt.widgets.QMainWindow;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Document;
 
 import javax.swing.JFrame;
+import java.awt.*;
 import java.awt.event.*;
 
 @AllArgsConstructor
@@ -24,35 +29,38 @@ public class DOMDocument implements IManageableNode {
         body.update();
     }
 
-    public void pack(JFrame window) {
-        window.setVisible(true);
-        window.setLayout(null);
-        window.setBounds(100, 100, 800, 500);
-        window.setExtendedState(window.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+    public void pack(QMainWindow window) {
+        /*
+        window.getContentPane().setLayout(new DOMLayout(null));
+        //window.setBounds(100, 100, 800, 500);
+        window.setPreferredSize(new Dimension(800, 500));
+        window.setLocationRelativeTo(null);
+        //window.setExtendedState(window.getExtendedState()|JFrame.MAXIMIZED_BOTH);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setAutoRequestFocus(true);
         window.setIgnoreRepaint(false);
-        body.pack();
-        window.add(body.getComponent());
         body.initializeComponent();
 
-        window.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                window.requestFocus();
-                body.recalculateBounds();
-                window.repaint();
-            }
-        });
+        body.pack();
+        window.add(body.getComponent());
 
-        window.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                window.requestFocus();
-                body.recalculateBounds();
-                window.repaint();
-            }
-        });
+        window.pack();
+
+        window.setVisible(true);
+
+         */
+
+        window.resize(800, 500);
+
+        body.pack();
+        body.initializeComponent();
+        body.getComponent().setParent(window);
+        window.show();
+
+    }
+
+    public void recalculateBounds() {
+        body.recalculateBounds();
     }
 
 }

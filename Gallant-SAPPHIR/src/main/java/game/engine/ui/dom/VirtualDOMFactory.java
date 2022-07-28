@@ -1,9 +1,9 @@
 package game.engine.ui.dom;
 
-import game.engine.ui.dom.elements.DOMJButtonElement;
-import game.engine.ui.dom.elements.DOMJComboBoxElement;
-import game.engine.ui.dom.elements.DOMJPanelElement;
-import game.engine.ui.dom.elements.DOMJTextFieldElement;
+import game.engine.ui.dom.elements.DOMQPushButtonElement;
+import game.engine.ui.dom.elements.DOMQComboBoxElement;
+import game.engine.ui.dom.elements.DOMQFrameElement;
+import game.engine.ui.dom.elements.DOMQLineEditElement;
 import game.engine.ui.dom.nodes.*;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
@@ -62,7 +62,7 @@ public class VirtualDOMFactory {
     }
 
     private DOMElement<?> generateDOMElement(Node node, DOMElement<?> parent) {
-        DOMElement<?> domElement = newDOMElement(node);
+        DOMElement<?> domElement = newDOMElement(node, parent);
         domElement.setParent(parent);
         NodeList elementNodes = node.getChildNodes();
         for(int i = 0; i < elementNodes.getLength(); i++) {
@@ -75,16 +75,16 @@ public class VirtualDOMFactory {
         return domElement;
     }
 
-    private DOMElement<?> newDOMElement(Node node) {
+    private DOMElement<?> newDOMElement(Node node, DOMElement<?> parent) {
         switch (node.getNodeName()) {
-            case "jpanel":
-                return new DOMJPanelElement(node);
-            case "jtextfield":
-                return new DOMJTextFieldElement(node);
-            case "jbutton":
-                return new DOMJButtonElement(node);
-            case "jcombobox":
-                return new DOMJComboBoxElement(node);
+            case DOMQFrameElement.TAG_NAME:
+                return new DOMQFrameElement(node, parent.getHierarchyName());
+            case DOMQLineEditElement.TAG_NAME:
+                return new DOMQLineEditElement(node, parent.getHierarchyName());
+            case DOMQPushButtonElement.TAG_NAME:
+                return new DOMQPushButtonElement(node, parent.getHierarchyName());
+            case DOMQComboBoxElement.TAG_NAME:
+                return new DOMQComboBoxElement(node, parent.getHierarchyName());
         }
         return null;
     }

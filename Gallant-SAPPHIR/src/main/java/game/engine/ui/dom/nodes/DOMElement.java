@@ -1,6 +1,8 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.dom.VirtualDOM;
+import game.engine.ui.layout.DOMLayout;
+import io.qt.widgets.QWidget;
 import lombok.Getter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -10,14 +12,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class DOMElement<T extends JComponent> extends DOMNode<DOMElement<?>> {
+//public class DOMElement<T extends JComponent> extends DOMNode<DOMElement<?>> {
+public class DOMElement<T extends QWidget> extends DOMNode<DOMElement<?>> {
+
+    @Getter
+    private String hierarchyName;
 
     @Getter
     private T component;
 
-    public DOMElement(T component, Node node) {
+    public DOMElement(T component, Node node, String hierarchyName) {
         super(node);
         this.component = component;
+        this.hierarchyName = hierarchyName;
+        //component.setLayout(new DOMLayout(this));
     }
 
     public void setAttribute(String name, Object value, Class<?>... parameterTypes) {
@@ -46,20 +54,24 @@ public class DOMElement<T extends JComponent> extends DOMNode<DOMElement<?>> {
     }
 
     void pack() {
+        System.out.println(hierarchyName);
         this.getChildren().forEach(domElement -> {
             domElement.pack();
-            component.add(domElement.getComponent());
+            //component.add(domElement.getComponent());
+            domElement.getComponent().setParent(component);
         });
     }
 
     protected void initializeComponent() {
-        component.setLayout(null);
+        //component.setLayout(null);
         calculateBounds();
         this.getChildren().forEach(DOMElement::initializeComponent);
     }
 
     protected void calculateBounds() {
-        this.getComponent().setBounds(0, 0, VirtualDOM.getWindowWidth(), VirtualDOM.getWindowHeight());
+        //this.getComponent().setBounds(0, 0, VirtualDOM.getWindowWidth(), VirtualDOM.getWindowHeight());
+        this.component.move(0, 0);
+        this.component.resize(VirtualDOM.getWindowWidth(), VirtualDOM.getWindowHeight());
     }
 
     protected void recalculateBounds() {
