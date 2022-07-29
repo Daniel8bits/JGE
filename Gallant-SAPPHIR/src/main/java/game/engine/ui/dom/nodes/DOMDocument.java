@@ -1,8 +1,11 @@
 package game.engine.ui.dom.nodes;
 
+import game.engine.ui.components.MainWindow;
+import game.engine.ui.dom.VirtualDOM;
 import game.engine.ui.layout.DOMLayout;
 import io.qt.gui.QScreen;
 import io.qt.gui.QWindow;
+import io.qt.widgets.QHBoxLayout;
 import io.qt.widgets.QMainWindow;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,33 +32,16 @@ public class DOMDocument implements IManageableNode {
         body.update();
     }
 
-    public void pack(QMainWindow window) {
-        /*
-        window.getContentPane().setLayout(new DOMLayout(null));
-        //window.setBounds(100, 100, 800, 500);
-        window.setPreferredSize(new Dimension(800, 500));
-        window.setLocationRelativeTo(null);
-        //window.setExtendedState(window.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setAutoRequestFocus(true);
-        window.setIgnoreRepaint(false);
-        body.initializeComponent();
+    public void pack(MainWindow window) {
 
-        body.pack();
-        window.add(body.getComponent());
 
-        window.pack();
-
-        window.setVisible(true);
-
-         */
-
-        window.resize(800, 500);
-
+        window.getQWidget().resize(800, 500);
+        body.getComponent().setLayout("horizontal");
         body.pack();
         body.initializeComponent();
-        body.getComponent().setParent(window);
-        window.show();
+
+        window.getQWidget().setCentralWidget(body.getComponent().getQWidget());
+        window.getQWidget().show();
 
     }
 

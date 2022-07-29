@@ -1,9 +1,9 @@
 package game.engine.ui.dom;
 
-import game.engine.ui.dom.elements.DOMQPushButtonElement;
-import game.engine.ui.dom.elements.DOMQComboBoxElement;
-import game.engine.ui.dom.elements.DOMQFrameElement;
-import game.engine.ui.dom.elements.DOMQLineEditElement;
+import game.engine.ui.dom.elements.DOMButtonElement;
+import game.engine.ui.dom.elements.DOMComboBoxElement;
+import game.engine.ui.dom.elements.DOMDivElement;
+import game.engine.ui.dom.elements.DOMTextFieldElement;
 import game.engine.ui.dom.nodes.*;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
@@ -77,14 +77,14 @@ public class VirtualDOMFactory {
 
     private DOMElement<?> newDOMElement(Node node, DOMElement<?> parent) {
         switch (node.getNodeName()) {
-            case DOMQFrameElement.TAG_NAME:
-                return new DOMQFrameElement(node, parent.getHierarchyName());
-            case DOMQLineEditElement.TAG_NAME:
-                return new DOMQLineEditElement(node, parent.getHierarchyName());
-            case DOMQPushButtonElement.TAG_NAME:
-                return new DOMQPushButtonElement(node, parent.getHierarchyName());
-            case DOMQComboBoxElement.TAG_NAME:
-                return new DOMQComboBoxElement(node, parent.getHierarchyName());
+            case DOMDivElement.TAG_NAME:
+                return new DOMDivElement(node, parent.getHierarchyName());
+            case DOMTextFieldElement.TAG_NAME:
+                return new DOMTextFieldElement(node, parent.getHierarchyName());
+            case DOMButtonElement.TAG_NAME:
+                return new DOMButtonElement(node, parent.getHierarchyName());
+            case DOMComboBoxElement.TAG_NAME:
+                return new DOMComboBoxElement(node, parent.getHierarchyName());
         }
         return null;
     }

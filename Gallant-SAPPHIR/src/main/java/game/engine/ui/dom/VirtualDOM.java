@@ -1,8 +1,11 @@
 package game.engine.ui.dom;
 
 
+import game.engine.ui.components.MainWindow;
 import game.engine.ui.dom.nodes.DOMDocument;
 import lombok.Getter;
+
+
 
 public class VirtualDOM {
 
@@ -10,7 +13,7 @@ public class VirtualDOM {
     private DOMDocument domDocument;
 
     @Getter
-    private final Window window;
+    private final MainWindow window;
     private final static VirtualDOM instance;
 
     static {
@@ -18,7 +21,7 @@ public class VirtualDOM {
     }
 
     private VirtualDOM() {
-        window = new Window();
+        window = new MainWindow();
     }
 
     public static VirtualDOM getInstance() {
@@ -33,15 +36,11 @@ public class VirtualDOM {
 
 
     public static int getWindowWidth() {
-        //return instance.window.getBounds().width;
-        //return instance.window.getWidth();
-        return instance.window.width();
+        return instance.window.getQWidget().width();
     }
 
     public static int getWindowHeight() {
-        //return instance.window.getBounds().height;
-        //return instance.window.getHeight();
-        return instance.window.height();
+        return instance.window.getQWidget().height();
     }
 
 

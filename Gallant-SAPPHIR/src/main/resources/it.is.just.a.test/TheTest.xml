@@ -4,8 +4,9 @@
         <title> Isso é um teste </title>
     </head>
     <body>
-        <qframe>
-            <qpushbutton> Click here </qpushbutton>
-        </qframe>
+        <div layout="horizontal">
+            <button> Click here </button>
+            <textfield  />
+        </div>
     </body>
 </document>
