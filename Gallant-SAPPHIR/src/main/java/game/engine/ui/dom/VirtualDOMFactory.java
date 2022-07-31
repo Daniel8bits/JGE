@@ -62,7 +62,13 @@ public class VirtualDOMFactory {
     }
 
     private DOMElement<?> generateDOMElement(Node node, DOMElement<?> parent) {
+
         DOMElement<?> domElement = newDOMElement(node, parent);
+        String layout = new DOMElementFacade().getAttributeValue(domElement, DOMElementFacade.AttributeEnum.LAYOUT.VALUE);
+        if(layout != null) {
+            new DOMElementFacade().reduceLayouts(domElement.getComponent(), layout);
+        }
+
         domElement.setParent(parent);
         NodeList elementNodes = node.getChildNodes();
         for(int i = 0; i < elementNodes.getLength(); i++) {

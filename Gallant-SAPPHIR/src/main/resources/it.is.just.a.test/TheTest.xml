@@ -4,9 +4,16 @@
         <title> Isso é um teste </title>
     </head>
     <body>
-        <div layout="horizontal">
-            <button> Click here </button>
-            <textfield  />
+        <div layout="grid">
+            <label cell="0, 0"> Username: </label> <textfield cell="0, 1"  />
+            <label cell="1, 0"> Password: </label> <textfield cell="1, 1"  />
+            <button cell="2, 0"> Login </button>
+            <layout-horizontal cell="2, 1">
+                <checkbox> Remember me </checkbox>
+                <checkbox> Do another thing </checkbox>
+                <spacer-horizontal  />
+            </layout-horizontal>
+            <spacer-vertical cell="3, 0"  />
         </div>
     </body>
 </document>

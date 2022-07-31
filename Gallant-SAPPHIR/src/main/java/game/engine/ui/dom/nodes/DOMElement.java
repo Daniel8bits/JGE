@@ -1,24 +1,24 @@
 package game.engine.ui.dom.nodes;
 
-import game.engine.ui.components.Component;
+import game.engine.ui.components.IComponent;
 import game.engine.ui.dom.VirtualDOM;
-import game.engine.ui.layout.DOMLayout;
+import game.engine.ui.dom.layouts.DOMLayout;
+import game.engine.ui.dom.spacers.DOMSpacer;
+import io.qt.widgets.QGridLayout;
+import io.qt.widgets.QLayout;
 import io.qt.widgets.QWidget;
 import lombok.Getter;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class DOMElement<T extends Component<?>> extends DOMNode<DOMElement<?>> {
+public class DOMElement<T extends IComponent> extends DOMItem {
 
     @Getter
     private String hierarchyName;
-
     @Getter
     private T component;
 
@@ -26,73 +26,87 @@ public class DOMElement<T extends Component<?>> extends DOMNode<DOMElement<?>> {
         super(node);
         this.component = component;
         this.hierarchyName = hierarchyName;
-        //component.setLayout(new DOMLayout(this));
     }
 
-    public void setAttribute(String name, Object value, Class<?>... parameterTypes) {
-        Class<T> componentClass = (Class<T>) component.getClass();
-        try {
-
-            Method method = componentClass.getMethod(name, parameterTypes);
-            if(!Modifier.toString(method.getModifiers()).equals(Modifier.toString(Modifier.PUBLIC))) {
-                throw new NoSuchMethodException();
-            }
-
-            method.invoke(component, value);
-
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    public DOMElement(T component, Node node, String hierarchyName, QLayout layout) {
+        super(node);
+        this.component = component;
+        this.hierarchyName = hierarchyName;
+        component.setLayout(layout);
     }
 
     @Override
     public void update() {
-        this.getChildren().forEach(DOMElement::update);
+        this.getChildren().forEach(DOMItem::update);
     }
 
-    void pack() {
-        initializeAttributes();
+    @Override
+    protected void pack() {
         System.out.println(hierarchyName);
-        this.getChildren().forEach(domElement -> {
-            domElement.pack();
-            component.add(domElement.component);
+        if(component.layout() == null) {
+            this.getChildren().forEach(domItem -> {
+                if(!(domItem instanceof DOMElement<?>)) return;
+                DOMElement<?> domElement = (DOMElement<?>) domItem;
+                domElement.pack();
+                domElement.component.setParent((QWidget) component);
+            });
+            return;
+        }
+        // if this has layout
+        this.getChildren().forEach(domItem -> {
+            domItem.pack();
+            if(domItem instanceof DOMElement<?>) {
+                DOMElement<?> domElement = (DOMElement<?>) domItem;
+                if(component.layout() instanceof QGridLayout) {
+                    QGridLayout gridLayout = (QGridLayout) component.layout();
+                    int[] cell = new DOMElementFacade().getCell(domElement);
+                    if(cell != null) {
+                        gridLayout.addWidget((QWidget) domElement.component, cell[0], cell[1], cell[2], cell[3]);
+                    }
+                    return;
+                }
+                component.layout().addWidget((QWidget) domElement.component);
+            } else if (domItem instanceof DOMLayout<?>) {
+                DOMLayout<?> domLayout = (DOMLayout<?>) domItem;
+                if(component.layout() instanceof QGridLayout) {
+                    QGridLayout gridLayout = (QGridLayout) component.layout();
+                    int[] cell = new DOMElementFacade().getCell(domLayout);
+                    if(cell != null) {
+                        gridLayout.addLayout(domLayout.getLayout(), cell[0], cell[1], cell[2], cell[3]);
+                    }
+                    return;
+                }
+                component.layout().addItem(domLayout.getLayout());
+            } else if (domItem instanceof DOMSpacer) {
+                DOMSpacer domSpacer = (DOMSpacer) domItem;
+                if(component.layout() instanceof QGridLayout) {
+                    QGridLayout gridLayout = (QGridLayout) component.layout();
+                    int[] cell = new DOMElementFacade().getCell(domSpacer);
+                    if(cell != null) {
+                        gridLayout.addItem(domSpacer.getSpacer(), cell[0], cell[1], cell[2], cell[3]);
+                    }
+                    return;
+                }
+                component.layout().addItem(domSpacer.getSpacer());
+            }
         });
     }
 
+    @Override
     protected void initializeComponent() {
-
-        //calculateBounds();
-        this.getChildren().forEach(DOMElement::initializeComponent);
-    }
-
-    private void initializeAttributes() {
-        NamedNodeMap attributes = getNode().getAttributes();
-        for(int i = 0; i < attributes.getLength(); i++) {
-            Node attribute = attributes.item(i);
-            reduceAttributes(attribute.getNodeName(), attribute.getNodeValue());
-        }
-    }
-
-    protected void reduceAttributes(String attribute, String value) {
-        switch (attribute) {
-            case "layout":
-                component.setLayout(value);
-                break;
-        }
+        calculateBounds();
+        new DOMElementFacade().initializeAttributes(this);
+        super.initializeComponent();
     }
 
     protected void calculateBounds() {
-        this.component.getQWidget().move(0, 0);
-        this.component.getQWidget().resize(VirtualDOM.getWindowWidth(), VirtualDOM.getWindowHeight());
+        this.component.bounds(0, 0, VirtualDOM.getWindowWidth(), VirtualDOM.getWindowHeight());
     }
 
+    @Override
     protected void recalculateBounds() {
         calculateBounds();
-        this.getChildren().forEach(DOMElement::recalculateBounds);
+        super.recalculateBounds();
     }
 
     public DOMElement<?> getParentAsElement() {

@@ -36,11 +36,11 @@ public class VirtualDOM {
 
 
     public static int getWindowWidth() {
-        return instance.window.getQWidget().width();
+        return instance.window.width();
     }
 
     public static int getWindowHeight() {
-        return instance.window.getQWidget().height();
+        return instance.window.height();
     }
 
 

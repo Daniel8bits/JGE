@@ -35,13 +35,15 @@ public class DOMDocument implements IManageableNode {
     public void pack(MainWindow window) {
 
 
-        window.getQWidget().resize(800, 500);
+        window.resize(800, 500);
         body.getComponent().setLayout("horizontal");
         body.pack();
         body.initializeComponent();
 
-        window.getQWidget().setCentralWidget(body.getComponent().getQWidget());
-        window.getQWidget().show();
+        window.setCentralWidget(body.getComponent());
+        window.show();
+
+        //window.setStyleSheet("QMainWindow {background-color: red;}");
 
     }
 

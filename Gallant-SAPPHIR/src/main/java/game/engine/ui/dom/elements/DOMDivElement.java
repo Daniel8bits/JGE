@@ -14,15 +14,15 @@ public class DOMDivElement extends DOMElement<Div> {
 
     @Override
     protected void initializeComponent() {
-        this.getComponent().getQWidget().setStyleSheet("background-color: blue;");
+        this.getComponent().setStyleSheet("QWidget {background-color: blue;}");
         super.initializeComponent();
     }
 
     @Override
     protected void calculateBounds() {
-        int width = this.getParentAsElement().getComponent().getQWidget().width();
-        int height = this.getParentAsElement().getComponent().getQWidget().height();
-        this.getComponent().getQWidget().move(0, 0);
-        this.getComponent().getQWidget().resize((width/100) * 60, (height/100) * 60);
+        int width = this.getParentAsElement().getComponent().width();
+        int height = this.getParentAsElement().getComponent().height();
+        this.getComponent().move(0, 0);
+        this.getComponent().resize((width/100) * 60, (height/100) * 60);
     }
 }

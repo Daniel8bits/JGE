@@ -13,4 +13,9 @@ public class DOMTextFieldElement extends DOMElement<TextField> {
     public DOMTextFieldElement(Node node, String parentHierarchyName) {
         super(new TextField(), node, parentHierarchyName + "_" + TAG_NAME);
     }
+
+    @Override
+    protected void calculateBounds() {
+        getComponent().bounds(0, 0, 100, 32);
+    }
 }

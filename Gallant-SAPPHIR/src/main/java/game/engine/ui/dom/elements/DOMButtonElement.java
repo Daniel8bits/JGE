@@ -15,13 +15,18 @@ public class DOMButtonElement extends DOMElement<Button> {
 
     @Override
     protected void initializeComponent() {
-        this.getComponent().getQWidget().setText(this.getNode().getTextContent());
+        this.getComponent().setText(this.getNode().getTextContent());
         super.initializeComponent();
     }
 
     @Override
     protected void calculateBounds() {
-        this.getComponent().getQWidget().move(0, 0);
-        this.getComponent().getQWidget().resize(100, 32);
+        this.getComponent().move(0, 0);
+        this.getComponent().resize(100, 32);
     }
+
+    public void sayHello() {
+        System.out.println("hello");
+    }
+
 }
