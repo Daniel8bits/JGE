@@ -1,20 +1,11 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.components.MainWindow;
-import game.engine.ui.dom.VirtualDOM;
-import game.engine.ui.layout.DOMLayout;
-import io.qt.gui.QScreen;
-import io.qt.gui.QWindow;
-import io.qt.widgets.QHBoxLayout;
-import io.qt.widgets.QMainWindow;
+import game.engine.ui.dom.elements.DOMBody;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Document;
-
-import javax.swing.JFrame;
-import java.awt.*;
-import java.awt.event.*;
 
 @AllArgsConstructor
 @Getter

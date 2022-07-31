@@ -1,7 +1,6 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.Div;
-import game.engine.ui.dom.nodes.DOMElement;
 import org.w3c.dom.Node;
 
 public class DOMDivElement extends DOMElement<Div> {
@@ -14,7 +13,6 @@ public class DOMDivElement extends DOMElement<Div> {
 
     @Override
     protected void initializeComponent() {
-        this.getComponent().setStyleSheet("QWidget {background-color: blue;}");
         super.initializeComponent();
     }
 

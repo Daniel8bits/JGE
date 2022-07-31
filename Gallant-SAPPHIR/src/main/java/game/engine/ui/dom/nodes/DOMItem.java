@@ -1,14 +1,18 @@
 package game.engine.ui.dom.nodes;
 
+import lombok.Getter;
 import org.w3c.dom.Node;
 
 public abstract class DOMItem extends DOMNode<DOMItem> {
 
-    public DOMItem(Node node) {
+    @Getter
+    private String hierarchyName;
+    public DOMItem(Node node, String hierarchyName) {
         super(node);
+        this.hierarchyName = hierarchyName;
     }
 
-    protected abstract void pack();
+    public abstract void pack();
     protected void initializeComponent() {
         this.getChildren().forEach(DOMItem::initializeComponent);
     }

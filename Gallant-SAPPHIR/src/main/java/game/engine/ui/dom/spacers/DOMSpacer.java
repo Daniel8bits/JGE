@@ -12,13 +12,13 @@ public class DOMSpacer extends DOMItem {
     @Getter
     private QSpacerItem spacer;
 
-    public DOMSpacer(Node node, QSpacerItem spacer) {
-        super(node);
+    public DOMSpacer(QSpacerItem spacer, Node node, String hierarchyName) {
+        super(node, hierarchyName);
         this.spacer = spacer;
     }
 
     @Override
-    protected void pack() {
+    public void pack() {
 
     }
 

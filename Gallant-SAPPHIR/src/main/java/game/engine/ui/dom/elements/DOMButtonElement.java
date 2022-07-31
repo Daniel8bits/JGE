@@ -1,8 +1,6 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.Button;
-import game.engine.ui.dom.nodes.DOMElement;
-import io.qt.widgets.QPushButton;
 import org.w3c.dom.Node;
 
 public class DOMButtonElement extends DOMElement<Button> {

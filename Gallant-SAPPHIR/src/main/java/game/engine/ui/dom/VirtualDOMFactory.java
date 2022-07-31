@@ -1,10 +1,14 @@
 package game.engine.ui.dom;
 
-import game.engine.ui.dom.elements.DOMButtonElement;
-import game.engine.ui.dom.elements.DOMComboBoxElement;
-import game.engine.ui.dom.elements.DOMDivElement;
-import game.engine.ui.dom.elements.DOMTextFieldElement;
+import game.engine.ui.dom.elements.*;
+import game.engine.ui.dom.layouts.DOMGridLayout;
+import game.engine.ui.dom.layouts.DOMHorizontalLayout;
+import game.engine.ui.dom.layouts.DOMLayout;
+import game.engine.ui.dom.layouts.DOMVerticalLayout;
 import game.engine.ui.dom.nodes.*;
+import game.engine.ui.dom.spacers.DOMHorizontalSpacer;
+import game.engine.ui.dom.spacers.DOMSpacer;
+import game.engine.ui.dom.spacers.DOMVerticalSpacer;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -56,43 +60,79 @@ public class VirtualDOMFactory {
             if(domElementChild.getNodeName().equals("#text")) {
                 continue;
             }
-            domBody.getChildren().add(generateDOMElement(domElementChild, domBody));
+            domBody.getChildren().add(generateDOMItem(domElementChild, domBody));
         }
         return domBody;
     }
 
-    private DOMElement<?> generateDOMElement(Node node, DOMElement<?> parent) {
+    private DOMItem generateDOMItem(Node node, DOMItem parent) {
+        DOMItem domItem = newDOMItem(node, parent);
+        domItem.setParent(parent);
+        NodeList elementNodes = node.getChildNodes();
+        for(int i = 0; i < elementNodes.getLength(); i++) {
+            Node domItemChild = elementNodes.item(i);
+            if(domItemChild.getNodeName().equals("#text")) {
+                continue;
+            }
+            domItem.getChildren().add(generateDOMItem(domItemChild, domItem));
+        }
+        return domItem;
+    }
 
-        DOMElement<?> domElement = newDOMElement(node, parent);
+    private DOMElement<?> configureDOMElement(DOMElement<?> domElement) {
         String layout = new DOMElementFacade().getAttributeValue(domElement, DOMElementFacade.AttributeEnum.LAYOUT.VALUE);
         if(layout != null) {
             new DOMElementFacade().reduceLayouts(domElement.getComponent(), layout);
         }
-
-        domElement.setParent(parent);
-        NodeList elementNodes = node.getChildNodes();
-        for(int i = 0; i < elementNodes.getLength(); i++) {
-            Node domElementChild = elementNodes.item(i);
-            if(domElementChild.getNodeName().equals("#text")) {
-                continue;
-            }
-            domElement.getChildren().add(generateDOMElement(domElementChild, domElement));
-        }
         return domElement;
     }
+/*
+    private DOMLayout<?> generateDOMLayout(Node node, DOMItem parent) {
+        return null;
+    }
 
-    private DOMElement<?> newDOMElement(Node node, DOMElement<?> parent) {
-        switch (node.getNodeName()) {
-            case DOMDivElement.TAG_NAME:
-                return new DOMDivElement(node, parent.getHierarchyName());
-            case DOMTextFieldElement.TAG_NAME:
-                return new DOMTextFieldElement(node, parent.getHierarchyName());
-            case DOMButtonElement.TAG_NAME:
-                return new DOMButtonElement(node, parent.getHierarchyName());
-            case DOMComboBoxElement.TAG_NAME:
-                return new DOMComboBoxElement(node, parent.getHierarchyName());
+    private DOMSpacer generateDOMSpacer(Node node, DOMItem parent) {
+        return null;
+    }
+*/
+    private DOMItem newDOMItem(Node node, DOMItem parent) {
+        if(VirtualDOM.getDOMManager().isElement(node.getNodeName())) {
+            return configureDOMElement(newDOMElement(node, parent));
+        } else if(VirtualDOM.getDOMManager().isLayout(node.getNodeName())) {
+            return newDOMLayout(node, parent);
+        } else if(VirtualDOM.getDOMManager().isSpacer(node.getNodeName())) {
+            return newDOMSpacer(node, parent);
         }
         return null;
+    }
+
+    private DOMElement<?> newDOMElement(Node node, DOMItem parent) {
+        return switch (node.getNodeName()) {
+            case DOMDivElement.TAG_NAME -> new DOMDivElement(node, parent.getHierarchyName());
+            case DOMTextFieldElement.TAG_NAME -> new DOMTextFieldElement(node, parent.getHierarchyName());
+            case DOMButtonElement.TAG_NAME -> new DOMButtonElement(node, parent.getHierarchyName());
+            case DOMComboBoxElement.TAG_NAME -> new DOMComboBoxElement(node, parent.getHierarchyName());
+            case DOMLabelElement.TAG_NAME -> new DOMLabelElement(node, parent.getHierarchyName());
+            case DOMCheckBoxElement.TAG_NAME -> new DOMCheckBoxElement(node, parent.getHierarchyName());
+            default -> null;
+        };
+    }
+
+    private DOMLayout<?> newDOMLayout(Node node, DOMItem parent) {
+        return switch (node.getNodeName()) {
+            case DOMHorizontalLayout.TAG_NAME -> new DOMHorizontalLayout(node, parent.getHierarchyName());
+            case DOMVerticalLayout.TAG_NAME -> new DOMVerticalLayout(node, parent.getHierarchyName());
+            case DOMGridLayout.TAG_NAME -> new DOMGridLayout(node, parent.getHierarchyName());
+            default -> null;
+        };
+    }
+
+    private DOMSpacer newDOMSpacer(Node node, DOMItem parent) {
+        return switch (node.getNodeName()) {
+            case DOMHorizontalSpacer.TAG_NAME -> new DOMHorizontalSpacer(node, parent.getHierarchyName());
+            case DOMVerticalSpacer.TAG_NAME -> new DOMVerticalSpacer(node, parent.getHierarchyName());
+            default -> null;
+        };
     }
 
 }

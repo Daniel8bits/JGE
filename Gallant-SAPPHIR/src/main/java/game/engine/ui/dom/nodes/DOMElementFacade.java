@@ -1,6 +1,7 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.components.IComponent;
+import game.engine.ui.dom.elements.DOMElement;
 import game.engine.ui.events.EventType;
 import game.engine.ui.events.MouseEvent;
 import game.engine.ui.events.callbacks.IMouseEventCallback;
@@ -117,6 +118,7 @@ public final class DOMElementFacade {
     // just for test
     @SuppressWarnings("unchecked")
     private IMouseEventCallback getCallback(DOMElement<?> element, String eventName) {
+        /*
         Class<DOMElement> elementClass = (Class<DOMElement>) element.getClass();
         Method method;
 
@@ -129,12 +131,16 @@ public final class DOMElementFacade {
             throw new RuntimeException(e);
         }
 
+        try {
+            method.invoke(element);
+        }catch (InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+         */
+
         return mouseEvent -> {
-            try {
-                method.invoke(element);
-            }catch (InvocationTargetException | IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+            System.out.println("hello");
         };
     }
 

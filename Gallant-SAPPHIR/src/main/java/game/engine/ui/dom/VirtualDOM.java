@@ -14,6 +14,8 @@ public class VirtualDOM {
 
     @Getter
     private final MainWindow window;
+    @Getter
+    private final DOMManager domManager;
     private final static VirtualDOM instance;
 
     static {
@@ -22,6 +24,7 @@ public class VirtualDOM {
 
     private VirtualDOM() {
         window = new MainWindow();
+        domManager = new DOMManager();
     }
 
     public static VirtualDOM getInstance() {
@@ -41,6 +44,10 @@ public class VirtualDOM {
 
     public static int getWindowHeight() {
         return instance.window.height();
+    }
+
+    public static DOMManager getDOMManager() {
+        return instance.domManager;
     }
 
 

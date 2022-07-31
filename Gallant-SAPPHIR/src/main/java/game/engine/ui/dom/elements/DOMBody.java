@@ -1,4 +1,4 @@
-package game.engine.ui.dom.nodes;
+package game.engine.ui.dom.elements;
 
 
 import game.engine.ui.components.Div;
@@ -13,8 +13,17 @@ public class DOMBody extends DOMElement<Div> {
     }
 
     @Override
-    protected void initializeComponent() {
-        this.getComponent().setStyleSheet("QWidget {background-color: red;}");
+    public void pack() {
+        super.pack();
+    }
+
+    @Override
+    public void initializeComponent() {
         super.initializeComponent();
+    }
+
+    @Override
+    public void recalculateBounds() {
+        super.recalculateBounds();
     }
 }

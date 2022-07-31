@@ -1,37 +1,29 @@
-package game.engine.ui.dom.nodes;
+package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.IComponent;
 import game.engine.ui.dom.VirtualDOM;
 import game.engine.ui.dom.layouts.DOMLayout;
+import game.engine.ui.dom.nodes.DOMElementFacade;
+import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.dom.spacers.DOMSpacer;
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QWidget;
 import lombok.Getter;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-
 public class DOMElement<T extends IComponent> extends DOMItem {
-
-    @Getter
-    private String hierarchyName;
     @Getter
     private T component;
 
     public DOMElement(T component, Node node, String hierarchyName) {
-        super(node);
+        super(node, hierarchyName);
         this.component = component;
-        this.hierarchyName = hierarchyName;
     }
 
     public DOMElement(T component, Node node, String hierarchyName, QLayout layout) {
-        super(node);
+        super(node, hierarchyName);
         this.component = component;
-        this.hierarchyName = hierarchyName;
         component.setLayout(layout);
     }
 
@@ -41,8 +33,8 @@ public class DOMElement<T extends IComponent> extends DOMItem {
     }
 
     @Override
-    protected void pack() {
-        System.out.println(hierarchyName);
+    public void pack() {
+        System.out.println(getHierarchyName());
         if(component.layout() == null) {
             this.getChildren().forEach(domItem -> {
                 if(!(domItem instanceof DOMElement<?>)) return;

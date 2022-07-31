@@ -1,7 +1,6 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.ComboBox;
-import game.engine.ui.dom.nodes.DOMElement;
 import org.w3c.dom.Node;
 
 public class DOMComboBoxElement extends DOMElement<ComboBox> {

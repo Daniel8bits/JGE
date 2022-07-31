@@ -1,8 +1,6 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.TextField;
-import game.engine.ui.dom.nodes.DOMElement;
-import io.qt.widgets.QLineEdit;
 import org.w3c.dom.Node;
 
 //public class DOMJTextFieldElement extends DOMElement<JTextField> {
