@@ -2,6 +2,8 @@ package game.engine.ui.dom.nodes;
 
 import game.engine.ui.components.IComponent;
 import game.engine.ui.dom.elements.DOMElement;
+import game.engine.ui.dom.layouts.DOMLayout;
+import game.engine.ui.dom.spacers.DOMSpacer;
 import game.engine.ui.events.EventType;
 import game.engine.ui.events.MouseEvent;
 import game.engine.ui.events.callbacks.IMouseEventCallback;
@@ -16,6 +18,7 @@ import org.w3c.dom.Node;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.function.Consumer;
 
 public final class DOMElementFacade {
 
@@ -23,7 +26,8 @@ public final class DOMElementFacade {
         LAYOUT("layout"),
         CELL("cell"),
         WIDTH("width"),
-        HEIGHT("height");
+        HEIGHT("height"),
+        EVENT("^on[a-zA-Z]+$");
 
         public final String VALUE;
         AttributeEnum(String attribute) {
@@ -37,11 +41,21 @@ public final class DOMElementFacade {
                 return WIDTH;
             } else if(layout.equals(HEIGHT.VALUE)) {
                 return HEIGHT;
+            } else if(layout.matches(EVENT.VALUE)) {
+                return EVENT;
             }
             return null;
         }
     }
 
+    /*
+    *
+    *   TODO:
+    *       - esse metodo deve ser modificado para receber DOMItem como parametro
+    *       - dentro do loop, usar reduceDOMItem para chamar o carregador de
+    *          atributos adequado
+    *
+    * */
     public void initializeAttributes(DOMElement<?> element) {
         NamedNodeMap attributes = element.getNode().getAttributes();
         for(int i = 0; i < attributes.getLength(); i++) {
@@ -50,37 +64,31 @@ public final class DOMElementFacade {
         }
     }
 
-    private void reduceAttributes(DOMElement<?> element, String attributeName, String value) {
-        if(attributeName.matches("^on[a-zA-Z]+$")) {
-            /*
-                Dentro do reduceEvents é necessário checar o attribute para
-                identificar o tipo de evento
-            */
-            reduceEvents(element, value);
-        }
+    private void reduceAttributes(DOMElement<?> domElement, String attributeName, String value) {
         AttributeEnum attribute = AttributeEnum.reduce(attributeName);
         if(attribute == null) {
             return;
         }
         switch (attribute) {
-            case WIDTH -> setWidth(element, value);
-            case HEIGHT -> setHeight(element, value);
+            case EVENT -> reduceEvents(domElement, value);
+            case WIDTH -> setWidth(domElement, value);
+            case HEIGHT -> setHeight(domElement, value);
         }
     }
 
-    private void setWidth(DOMElement<?> element, String value) {
+    private void setWidth(DOMElement<?> domElement, String value) {
         if(value.matches("[0-9]+px")) {
-            element.getComponent().resize(
+            domElement.getComponent().resize(
                     Integer.parseInt(value.split("px")[0]),
-                    element.getComponent().height()
+                    domElement.getComponent().height()
             );
         }
     }
 
-    private void setHeight(DOMElement<?> element, String value) {
+    private void setHeight(DOMElement<?> domElement, String value) {
         if(value.matches("[0-9]+px")) {
-            element.getComponent().resize(
-                    element.getComponent().width(),
+            domElement.getComponent().resize(
+                    domElement.getComponent().width(),
                     Integer.parseInt(value.split("px")[0])
             );
         }
@@ -184,6 +192,16 @@ public final class DOMElementFacade {
 
         }
         return cell;
+    }
+
+    public void reduceDomItem(DOMItem domItem, Consumer<DOMElement<?>> ifElement, Consumer<DOMLayout<?>> ifLayout, Consumer<DOMSpacer> ifSpacer) {
+        if(domItem instanceof DOMElement<?>) {
+            ifElement.accept((DOMElement<?>) domItem);
+        } else if (domItem instanceof DOMLayout<?>) {
+            ifLayout.accept((DOMLayout<?>) domItem);
+        } else if (domItem instanceof DOMSpacer) {
+            ifSpacer.accept((DOMSpacer) domItem);
+        }
     }
 
 

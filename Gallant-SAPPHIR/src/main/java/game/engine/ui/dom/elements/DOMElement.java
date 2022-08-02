@@ -16,6 +16,11 @@ public class DOMElement<T extends IComponent> extends DOMItem {
     @Getter
     private T component;
 
+    /*
+        TODO:
+            - implementar o distribuidor de estilos CSS
+    */
+
     public DOMElement(T component, Node node, String hierarchyName) {
         super(node, hierarchyName);
         this.component = component;
@@ -84,10 +89,23 @@ public class DOMElement<T extends IComponent> extends DOMItem {
         });
     }
 
+    /*
+    *
+    *   TODO:
+    *       - o metodo initializeComponent pode ser entendido como o componentDidMount
+    *         do ReactJS
+    *       - é necessário implementar os equivalentes de componentDidUpdate e
+    *         componentWillUnmount
+    *       - encontrar uma forma de fazer atualização do componente por estados e atributos
+    *       - implementar um sistema de update por estado global
+    *       - implementar sistema de referenciamento de componentes (refs)
+    *       - implementar sistema parecido com useEffect
+    *
+    * */
     @Override
     protected void initializeComponent() {
         calculateBounds();
-        new DOMElementFacade().initializeAttributes(this);
+        new DOMElementFacade().initializeAttributes(this); // talvez n seja o melhor lugar
         super.initializeComponent();
     }
 
