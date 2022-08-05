@@ -19,8 +19,8 @@ public class DOMDocument implements IManageableNode {
     @Override
     public void update() {
 
-        header.update();
-        body.update();
+        //header.update();
+        //body.update();
     }
 
     public void pack(MainWindow window) {

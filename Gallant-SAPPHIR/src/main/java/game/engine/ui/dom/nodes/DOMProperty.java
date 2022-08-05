@@ -10,8 +10,4 @@ public class DOMProperty extends DOMNode<DOMProperty> {
     }
 
 
-    @Override
-    public void update() {
-
-    }
 }

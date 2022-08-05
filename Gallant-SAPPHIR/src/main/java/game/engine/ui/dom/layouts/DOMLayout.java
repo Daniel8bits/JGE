@@ -3,6 +3,8 @@ package game.engine.ui.dom.layouts;
 import game.engine.ui.dom.elements.DOMElement;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.dom.spacers.DOMSpacer;
+import game.engine.ui.framework.interfaces.IProps;
+import game.engine.ui.framework.interfaces.IStates;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QWidget;
 import lombok.Getter;
@@ -38,7 +40,18 @@ public class DOMLayout<T extends QLayout> extends DOMItem {
     }
 
     @Override
-    public void update() {
+    protected void whenMounted() {
 
     }
+
+    @Override
+    protected void whenUpdated(IProps previousProps, IStates previousStates) {
+
+    }
+
+    @Override
+    protected void whenUnmounted() {
+
+    }
+
 }

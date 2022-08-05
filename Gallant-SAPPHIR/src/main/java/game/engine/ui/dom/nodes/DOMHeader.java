@@ -3,7 +3,7 @@ package game.engine.ui.dom.nodes;
 import org.w3c.dom.Node;
 
 
-public class DOMHeader extends DOMNode<DOMProperty> implements IManageableNode {
+public class DOMHeader extends DOMNode<DOMProperty> {
 
     public final static String TAG_NAME = "head";
 
@@ -11,10 +11,5 @@ public class DOMHeader extends DOMNode<DOMProperty> implements IManageableNode {
         super(node);
     }
 
-    @Override
-    public void update() {
-
-        this.getChildren().forEach(DOMProperty::update);
-    }
 
 }

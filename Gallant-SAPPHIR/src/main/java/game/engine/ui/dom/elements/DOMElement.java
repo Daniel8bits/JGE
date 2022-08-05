@@ -6,13 +6,24 @@ import game.engine.ui.dom.layouts.DOMLayout;
 import game.engine.ui.dom.nodes.DOMElementFacade;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.dom.spacers.DOMSpacer;
+import game.engine.ui.framework.interfaces.IProps;
+import game.engine.ui.framework.interfaces.IStates;
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QWidget;
 import lombok.Getter;
 import org.w3c.dom.Node;
 
-public class DOMElement<T extends IComponent> extends DOMItem {
+public abstract class DOMElement<T extends IComponent> extends DOMItem {
+
+    public static class DOMElementProps extends DOMItem.DOMItemProps {
+        public String layout;
+    }
+
+    public static class DOMElementStates implements IStates {
+        public String test;
+    }
+
     @Getter
     private T component;
 
@@ -22,19 +33,17 @@ public class DOMElement<T extends IComponent> extends DOMItem {
     */
 
     public DOMElement(T component, Node node, String hierarchyName) {
-        super(node, hierarchyName);
+        super(node, hierarchyName);//, PropsBuilder.of(DOMElementProps.class), StatesBuilder.of(Stateless.class));
         this.component = component;
+
+        set(states -> ((DOMElementStates) states).test = "teste");
+
     }
 
     public DOMElement(T component, Node node, String hierarchyName, QLayout layout) {
-        super(node, hierarchyName);
+        super(node, hierarchyName);//, PropsBuilder.of(DOMElementProps.class), StatesBuilder.of(Stateless.class));
         this.component = component;
         component.setLayout(layout);
-    }
-
-    @Override
-    public void update() {
-        this.getChildren().forEach(DOMItem::update);
     }
 
     @Override
@@ -106,6 +115,7 @@ public class DOMElement<T extends IComponent> extends DOMItem {
     protected void initializeComponent() {
         calculateBounds();
         new DOMElementFacade().initializeAttributes(this); // talvez n seja o melhor lugar
+        whenMounted();
         super.initializeComponent();
     }
 
@@ -119,8 +129,31 @@ public class DOMElement<T extends IComponent> extends DOMItem {
         super.recalculateBounds();
     }
 
+
+
     public DOMElement<?> getParentAsElement() {
         return (DOMElement<?>) this.getParent();
+    }
+
+
+
+    /*==================================
+                LIFECYCLE
+    ==================================*/
+
+    @Override
+    protected void whenMounted() {
+        System.out.println(((DOMElementStates) get()).test);
+    }
+
+    @Override
+    protected void whenUpdated(IProps previousProps, IStates previousStates) {
+
+    }
+
+    @Override
+    protected void whenUnmounted() {
+
     }
 
 }

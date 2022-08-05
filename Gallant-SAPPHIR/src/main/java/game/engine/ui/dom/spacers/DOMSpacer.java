@@ -1,6 +1,8 @@
 package game.engine.ui.dom.spacers;
 
 import game.engine.ui.dom.nodes.DOMItem;
+import game.engine.ui.framework.interfaces.IProps;
+import game.engine.ui.framework.interfaces.IStates;
 import io.qt.widgets.QSpacerItem;
 import lombok.Getter;
 import org.w3c.dom.Node;
@@ -23,7 +25,17 @@ public class DOMSpacer extends DOMItem {
     }
 
     @Override
-    public void update() {
+    protected void whenMounted() {
+
+    }
+
+    @Override
+    protected void whenUpdated(IProps previousProps, IStates previousStates) {
+
+    }
+
+    @Override
+    protected void whenUnmounted() {
 
     }
 }

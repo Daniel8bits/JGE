@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class DOMNode<T extends DOMNode<?>> implements IManageableNode {
+public abstract class DOMNode<T extends DOMNode<?>> {
 
     private Node node;
     @Getter
