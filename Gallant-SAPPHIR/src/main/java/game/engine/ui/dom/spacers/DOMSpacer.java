@@ -1,5 +1,7 @@
 package game.engine.ui.dom.spacers;
 
+import game.engine.ui.dom.elements.DOMElement;
+import game.engine.ui.dom.layouts.DOMLayout;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
@@ -23,6 +25,22 @@ public class DOMSpacer extends DOMItem {
     public void pack() {
 
     }
+    public void removeFromParentComponent() {
+        DOMItem parent = (DOMItem) getParent();
+        if(parent == null) {
+            return;
+        }
+        if (parent instanceof DOMLayout<?>) {
+            DOMLayout<?> pDomLayout = (DOMLayout<?>) parent;
+            pDomLayout.getLayout().removeItem(spacer);
+        }
+    }
+
+    @Override
+    public void removeFromParent() {
+        removeFromParentComponent();
+        super.removeFromParent();
+    }
 
     @Override
     protected void whenMounted() {
@@ -36,6 +54,11 @@ public class DOMSpacer extends DOMItem {
 
     @Override
     protected void whenUnmounted() {
+
+    }
+
+    @Override
+    protected void render() {
 
     }
 }

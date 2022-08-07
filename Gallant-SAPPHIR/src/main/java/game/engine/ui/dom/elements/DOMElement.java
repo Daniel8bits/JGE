@@ -6,6 +6,8 @@ import game.engine.ui.dom.layouts.DOMLayout;
 import game.engine.ui.dom.nodes.DOMElementFacade;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.dom.spacers.DOMSpacer;
+import game.engine.ui.framework.annotations.Props;
+import game.engine.ui.framework.annotations.States;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
 import io.qt.widgets.QGridLayout;
@@ -14,12 +16,16 @@ import io.qt.widgets.QWidget;
 import lombok.Getter;
 import org.w3c.dom.Node;
 
+import java.util.Optional;
+
 public abstract class DOMElement<T extends IComponent> extends DOMItem {
 
+    @Props
     public static class DOMElementProps extends DOMItem.DOMItemProps {
         public String layout;
     }
 
+    @States
     public static class DOMElementStates implements IStates {
         public String test;
     }
@@ -33,7 +39,7 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
     */
 
     public DOMElement(T component, Node node, String hierarchyName) {
-        super(node, hierarchyName);//, PropsBuilder.of(DOMElementProps.class), StatesBuilder.of(Stateless.class));
+        super(node, hierarchyName);
         this.component = component;
 
         set(states -> ((DOMElementStates) states).test = "teste");
@@ -41,7 +47,7 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
     }
 
     public DOMElement(T component, Node node, String hierarchyName, QLayout layout) {
-        super(node, hierarchyName);//, PropsBuilder.of(DOMElementProps.class), StatesBuilder.of(Stateless.class));
+        super(node, hierarchyName);
         this.component = component;
         component.setLayout(layout);
     }
@@ -49,24 +55,28 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
     @Override
     public void pack() {
         System.out.println(getHierarchyName());
-        if(component.layout() == null) {
-            this.getChildren().forEach(domItem -> {
-                if(!(domItem instanceof DOMElement<?>)) return;
-                DOMElement<?> domElement = (DOMElement<?>) domItem;
-                domElement.pack();
-                domElement.component.setParent((QWidget) component);
-            });
-            return;
-        }
-        // if this has layout
         this.getChildren().forEach(domItem -> {
             domItem.pack();
+            configureLayout(domItem);
+        });
+    }
+
+    private void configureLayout(DOMItem domItem) {
+
+        if(component.layout() == null) {
+            if(!(domItem instanceof DOMElement<?>)) {
+                return;
+            }
+            DOMElement<?> domElement = (DOMElement<?>) domItem;
+            domElement.component.setParent((QWidget) component);
+        } else {
             if(domItem instanceof DOMElement<?>) {
                 DOMElement<?> domElement = (DOMElement<?>) domItem;
                 if(component.layout() instanceof QGridLayout) {
                     QGridLayout gridLayout = (QGridLayout) component.layout();
                     int[] cell = new DOMElementFacade().getCell(domElement);
                     if(cell != null) {
+                        domElement.removeFromParentComponent();
                         gridLayout.addWidget((QWidget) domElement.component, cell[0], cell[1], cell[2], cell[3]);
                     }
                     return;
@@ -78,6 +88,7 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
                     QGridLayout gridLayout = (QGridLayout) component.layout();
                     int[] cell = new DOMElementFacade().getCell(domLayout);
                     if(cell != null) {
+                        domLayout.removeFromParentComponent();
                         gridLayout.addLayout(domLayout.getLayout(), cell[0], cell[1], cell[2], cell[3]);
                     }
                     return;
@@ -89,13 +100,39 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
                     QGridLayout gridLayout = (QGridLayout) component.layout();
                     int[] cell = new DOMElementFacade().getCell(domSpacer);
                     if(cell != null) {
+                        domSpacer.removeFromParentComponent();
                         gridLayout.addItem(domSpacer.getSpacer(), cell[0], cell[1], cell[2], cell[3]);
                     }
                     return;
                 }
                 component.layout().addItem(domSpacer.getSpacer());
             }
-        });
+        }
+
+    }
+
+    public void removeFromParentComponent() {
+        DOMItem parent = (DOMItem) getParent();
+        if(parent == null) {
+            return;
+        }
+        if(parent instanceof DOMElement<?>) {
+            DOMElement<?> pDomElement = (DOMElement<?>) parent;
+            Optional.ofNullable(pDomElement.component.layout())
+                    .ifPresentOrElse(
+                            qLayout -> qLayout.removeWidget((QWidget) component),
+                            () -> component.setParent(null)
+                    );
+        } else if (parent instanceof DOMLayout<?>) {
+            DOMLayout<?> pDomLayout = (DOMLayout<?>) parent;
+            pDomLayout.getLayout().removeWidget((QWidget) component);
+        }
+    }
+
+    @Override
+    public void removeFromParent() {
+        removeFromParentComponent();
+        super.removeFromParent();
     }
 
     /*
@@ -143,16 +180,25 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
 
     @Override
     protected void whenMounted() {
-        System.out.println(((DOMElementStates) get()).test);
+        System.out.println(((DOMElementProps) props()).layout);
     }
 
     @Override
     protected void whenUpdated(IProps previousProps, IStates previousStates) {
-
+        DOMElementProps props = (DOMElementProps) props();
+        DOMElementProps pProps = (DOMElementProps) previousProps;
+        if(notEquals(pProps.layout, props.layout)) {
+            getChildren().forEach(this::configureLayout);
+        }
     }
 
     @Override
     protected void whenUnmounted() {
+
+    }
+
+    @Override
+    protected void render() {
 
     }
 

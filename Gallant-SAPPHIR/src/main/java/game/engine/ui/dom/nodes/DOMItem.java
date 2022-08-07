@@ -1,6 +1,7 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.framework.StateManager;
+import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 
 public abstract class DOMItem extends DOMNode<DOMItem> {
 
+    @Props
     public static class DOMItemProps implements IProps {
         //public List<Integer> cell;
         //public List<DOMItem> children;
@@ -26,7 +28,7 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     public DOMItem(Node node, String hierarchyName) {
         super(node);
         this.hierarchyName = hierarchyName;
-        this.stateManager = new StateManager(this);
+        this.stateManager = new StateManager(this, getNode());
         this.updateCycles = 0;
     }
 
@@ -53,16 +55,17 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     }
 
     protected void set(IStates states) {
-        stateManager.setStates(states);
-        whenUpdated(stateManager.getPreviousProps(), stateManager.getPreviousState());
-        doUpdates();
+        if(!stateManager.equalsStates(states)) {
+            stateManager.setStates(states);
+            whenUpdated(stateManager.getPreviousProps(), stateManager.getPreviousState());
+            doUpdates();
+        }
     }
 
     protected void set(Consumer<IStates> fn) {
         IStates states = get();
         fn.accept(states);
         set(states);
-        doUpdates();
     }
 
     private void doUpdates() {
@@ -79,5 +82,19 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
 
     protected StateManager getStateManager() {
         return stateManager;
+    }
+
+
+    protected boolean notEquals(Object a, Object b) {
+        if(a == null && b == null) {
+            return false;
+        }
+        if(a != null && b == null) {
+            return true;
+        }
+        if(a == null && b != null) {
+            return true;
+        }
+        return !a.equals(b);
     }
 }

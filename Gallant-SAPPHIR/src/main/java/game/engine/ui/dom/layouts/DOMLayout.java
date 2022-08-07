@@ -10,7 +10,7 @@ import io.qt.widgets.QWidget;
 import lombok.Getter;
 import org.w3c.dom.Node;
 
-public class DOMLayout<T extends QLayout> extends DOMItem {
+public abstract class DOMLayout<T extends QLayout> extends DOMItem {
 
     public final static String PREFIX = "layout-";
 
@@ -28,15 +28,38 @@ public class DOMLayout<T extends QLayout> extends DOMItem {
             domItem.pack();
             if(domItem instanceof DOMElement<?>) {
                 DOMElement<?> domElement = (DOMElement<?>) domItem;
+                domElement.removeFromParentComponent();
                 getLayout().addWidget((QWidget) domElement.getComponent());
             } else if (domItem instanceof DOMLayout<?>) {
                 DOMLayout<?> domLayout = (DOMLayout<?>) domItem;
+                domLayout.removeFromParentComponent();
                 getLayout().addItem(domLayout.getLayout());
             } else if (domItem instanceof DOMSpacer) {
                 DOMSpacer domSpacer = (DOMSpacer) domItem;
+                domSpacer.removeFromParentComponent();
                 getLayout().addItem(domSpacer.getSpacer());
             }
         });
+    }
+
+    public void removeFromParentComponent() {
+        DOMItem parent = (DOMItem) getParent();
+        if(parent == null) {
+            return;
+        }
+        if(parent instanceof DOMElement<?>) {
+            DOMElement<?> pDomElement = (DOMElement<?>) parent;
+            pDomElement.getComponent().layout().removeItem(layout);
+        } else if (parent instanceof DOMLayout<?>) {
+            DOMLayout<?> pDomLayout = (DOMLayout<?>) parent;
+            pDomLayout.getLayout().removeItem(layout);
+        }
+    }
+
+    @Override
+    public void removeFromParent() {
+        removeFromParentComponent();
+        super.removeFromParent();
     }
 
     @Override
@@ -51,6 +74,11 @@ public class DOMLayout<T extends QLayout> extends DOMItem {
 
     @Override
     protected void whenUnmounted() {
+
+    }
+
+    @Override
+    protected void render() {
 
     }
 

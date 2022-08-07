@@ -4,26 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="added manager to all qt events">
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/StateType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/StateValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IProps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IStates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Propless.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Stateful.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Stateless.java" afterDir="false" />
+    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="added some lifecycle logic stuff">
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/DOMInterpreter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/annotations.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/Props.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/States.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/IComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/IComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMDocument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMHeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMHeader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMProperty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/spacers/DOMSpacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/spacers/DOMSpacer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +29,9 @@
       <list>
         <option value="Enum" />
         <option value="Kotlin Class" />
-        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -198,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659423027057</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added some lifecycle logic stuff">
+      <created>1659677187051</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659677187051</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +222,8 @@
     <MESSAGE value="beginning layouting system" />
     <MESSAGE value="added layouting system" />
     <MESSAGE value="added manager to all qt events" />
-    <option name="LAST_COMMIT_MESSAGE" value="added manager to all qt events" />
+    <MESSAGE value="added some lifecycle logic stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some lifecycle logic stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -240,11 +242,6 @@
           <url>file://$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager_old.java</url>
           <line>58</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

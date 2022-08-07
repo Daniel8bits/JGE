@@ -30,4 +30,11 @@ public abstract class DOMNode<T extends DOMNode<?>> {
         return node;
     }
 
+    public void removeFromParent() {
+        if(parent != null) {
+            parent.getChildren().remove(this);
+        }
+        parent = null;
+    }
+
 }

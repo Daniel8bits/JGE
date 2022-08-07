@@ -1,6 +1,7 @@
 package game.engine.ui.components;
 
 import game.engine.ui.events.management.EventManager;
+import io.qt.core.QObject;
 import io.qt.widgets.QHBoxLayout;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QVBoxLayout;
@@ -52,6 +53,7 @@ public interface IComponent {
             setLayout(new QVBoxLayout());
         }
     }
+
     EventManager getEventManager();
     QLayout layout();
     void resize(int width, int height);
@@ -59,5 +61,6 @@ public interface IComponent {
     void setLayout(QLayout layout);
     int width();
     int height();
+    QObject parent();
     void setParent(QWidget qWidget);
 }
