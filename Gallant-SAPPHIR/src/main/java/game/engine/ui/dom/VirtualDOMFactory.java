@@ -108,29 +108,29 @@ public class VirtualDOMFactory {
 
     private DOMElement<?> newDOMElement(Node node, DOMItem parent) {
         return switch (node.getNodeName()) {
-            case DOMDivElement.TAG_NAME -> new DOMDivElement(node, parent.getHierarchyName());
-            case DOMTextFieldElement.TAG_NAME -> new DOMTextFieldElement(node, parent.getHierarchyName());
-            case DOMButtonElement.TAG_NAME -> new DOMButtonElement(node, parent.getHierarchyName());
-            case DOMComboBoxElement.TAG_NAME -> new DOMComboBoxElement(node, parent.getHierarchyName());
-            case DOMLabelElement.TAG_NAME -> new DOMLabelElement(node, parent.getHierarchyName());
-            case DOMCheckBoxElement.TAG_NAME -> new DOMCheckBoxElement(node, parent.getHierarchyName());
+            case DOMDivElement.TAG_NAME -> new DOMDivElement(null, node, parent.getHierarchyName());
+            case DOMTextFieldElement.TAG_NAME -> new DOMTextFieldElement(null, node, parent.getHierarchyName());
+            case DOMButtonElement.TAG_NAME -> new DOMButtonElement(null, node, parent.getHierarchyName());
+            case DOMComboBoxElement.TAG_NAME -> new DOMComboBoxElement(null, node, parent.getHierarchyName());
+            case DOMLabelElement.TAG_NAME -> new DOMLabelElement(null, node, parent.getHierarchyName());
+            case DOMCheckBoxElement.TAG_NAME -> new DOMCheckBoxElement(null, node, parent.getHierarchyName());
             default -> null;
         };
     }
 
     private DOMLayout<?> newDOMLayout(Node node, DOMItem parent) {
         return switch (node.getNodeName()) {
-            case DOMHorizontalLayout.TAG_NAME -> new DOMHorizontalLayout(node, parent.getHierarchyName());
-            case DOMVerticalLayout.TAG_NAME -> new DOMVerticalLayout(node, parent.getHierarchyName());
-            case DOMGridLayout.TAG_NAME -> new DOMGridLayout(node, parent.getHierarchyName());
+            case DOMHorizontalLayout.TAG_NAME -> new DOMHorizontalLayout(null, node, parent.getHierarchyName());
+            case DOMVerticalLayout.TAG_NAME -> new DOMVerticalLayout(null, node, parent.getHierarchyName());
+            case DOMGridLayout.TAG_NAME -> new DOMGridLayout(null, node, parent.getHierarchyName());
             default -> null;
         };
     }
 
     private DOMSpacer newDOMSpacer(Node node, DOMItem parent) {
         return switch (node.getNodeName()) {
-            case DOMHorizontalSpacer.TAG_NAME -> new DOMHorizontalSpacer(node, parent.getHierarchyName());
-            case DOMVerticalSpacer.TAG_NAME -> new DOMVerticalSpacer(node, parent.getHierarchyName());
+            case DOMHorizontalSpacer.TAG_NAME -> new DOMHorizontalSpacer(null, node, parent.getHierarchyName());
+            case DOMVerticalSpacer.TAG_NAME -> new DOMVerticalSpacer(null, node, parent.getHierarchyName());
             default -> null;
         };
     }

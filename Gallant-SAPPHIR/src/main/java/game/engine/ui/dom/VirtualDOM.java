@@ -3,6 +3,7 @@ package game.engine.ui.dom;
 
 import game.engine.ui.components.MainWindow;
 import game.engine.ui.dom.nodes.DOMDocument;
+import game.engine.ui.dom.nodes.DOMItem;
 import lombok.Getter;
 
 
@@ -48,6 +49,10 @@ public class VirtualDOM {
 
     public static DOMManager getDOMManager() {
         return instance.domManager;
+    }
+
+    public static void render(Class<? extends DOMItem> item) {
+
     }
 
 

@@ -7,6 +7,8 @@ import io.qt.widgets.QApplication;
 import io.qt.widgets.QMessageBox;
 import org.w3c.dom.Document;
 
+import java.util.Arrays;
+
 public class UITest {
 
     private VirtualDOM virtualDOM;
@@ -17,10 +19,10 @@ public class UITest {
 
     private void init() {
 
+        //Arrays.stream(Module.).forEach(System.out::println);
+
         Document document = new XMLParser().parse("/it.is.just.a.test/TheTest.xml");
         virtualDOM = new VirtualDOMFactory().generateVirtualDOM(document);
-
-
 
     }
 

@@ -1,8 +1,6 @@
 package game.engine.ui.framework;
 
-import game.engine.ui.dom.DOMInterpreter;
 import game.engine.ui.dom.nodes.DOMItem;
-import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.annotations.States;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
@@ -10,19 +8,16 @@ import org.w3c.dom.Node;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class StateManager {
 
     private IProps props, previousProps;
     private IStates states, previousStates;
-
     private Node node;
 
-    public StateManager(DOMItem domItem, Node node) {
+    public StateManager(DOMItem domItem, Node node, IProps props) {
         this.node = node;
+        this.props = props;
         initialize(domItem);
     }
 
@@ -55,20 +50,21 @@ public class StateManager {
     @SuppressWarnings("unchecked")
     private void initialize(DOMItem domItem) {
         Class<?> domItemClass = domItem.getClass();
-
+/*
         Arrays.stream(domItemClass.getClasses())
                 .filter(clazz -> Arrays.stream(clazz.getAnnotations()).anyMatch(annotation -> annotation instanceof Props))
                 .findFirst()
                 .ifPresent(propsClass -> {
                     try {
                         props = (IProps) propsClass.getConstructor(new Class<?>[0]).newInstance(new Object[0]);
-                        new DOMInterpreter().loadProps(domItem, node, props);
                         previousProps = cloneProps(props);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
                 });
+*/
+        previousProps = cloneProps(props);
 
         Arrays.stream(domItemClass.getClasses())
                 .filter(clazz -> Arrays.stream(clazz.getAnnotations()).anyMatch(annotation -> annotation instanceof States))
@@ -82,6 +78,8 @@ public class StateManager {
                         throw new RuntimeException(e);
                     }
                 });
+
+        //new DOMInterpreter(this).loadProps(domItem, node, props);
 
     }
 

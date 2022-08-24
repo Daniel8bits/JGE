@@ -1,14 +1,15 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.Div;
+import game.engine.ui.framework.interfaces.IProps;
 import org.w3c.dom.Node;
 
 public class DOMDivElement extends DOMElement<Div> {
 
     public final static String TAG_NAME = "div";
 
-    public DOMDivElement(Node node, String parentHierarchyName) {
-        super(new Div(), node, parentHierarchyName + "_" + TAG_NAME);
+    public DOMDivElement(IProps props, Node node, String parentHierarchyName) {
+        super(new Div(), props, node, parentHierarchyName + "_" + TAG_NAME);
     }
 
     @Override

@@ -38,18 +38,12 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
             - implementar o distribuidor de estilos CSS
     */
 
-    public DOMElement(T component, Node node, String hierarchyName) {
-        super(node, hierarchyName);
+    public DOMElement(T component, IProps props, Node node, String hierarchyName) {
+        super(props, node, hierarchyName);
         this.component = component;
 
         set(states -> ((DOMElementStates) states).test = "teste");
 
-    }
-
-    public DOMElement(T component, Node node, String hierarchyName, QLayout layout) {
-        super(node, hierarchyName);
-        this.component = component;
-        component.setLayout(layout);
     }
 
     @Override
@@ -198,8 +192,7 @@ public abstract class DOMElement<T extends IComponent> extends DOMItem {
     }
 
     @Override
-    protected void render() {
+    protected void setup() {
 
     }
-
 }

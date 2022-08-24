@@ -1,14 +1,15 @@
 package game.engine.ui.dom.elements;
 
 import game.engine.ui.components.Button;
+import game.engine.ui.framework.interfaces.IProps;
 import org.w3c.dom.Node;
 
 public class DOMButtonElement extends DOMElement<Button> {
 
     public final static String TAG_NAME = "button";
 
-    public DOMButtonElement(Node node, String parentHierarchyName) {
-        super(new Button(), node, parentHierarchyName + "_" + TAG_NAME);
+    public DOMButtonElement(IProps props, Node node, String parentHierarchyName) {
+        super(new Button(), props, node, parentHierarchyName + "_" + TAG_NAME);
     }
 
     @Override

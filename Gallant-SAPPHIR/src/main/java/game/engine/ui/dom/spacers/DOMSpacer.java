@@ -1,5 +1,6 @@
 package game.engine.ui.dom.spacers;
 
+import game.engine.ui.dom.elements.DOMCustomElement;
 import game.engine.ui.dom.elements.DOMElement;
 import game.engine.ui.dom.layouts.DOMLayout;
 import game.engine.ui.dom.nodes.DOMItem;
@@ -16,8 +17,8 @@ public class DOMSpacer extends DOMItem {
     @Getter
     private QSpacerItem spacer;
 
-    public DOMSpacer(QSpacerItem spacer, Node node, String hierarchyName) {
-        super(node, hierarchyName);
+    public DOMSpacer(QSpacerItem spacer, IProps props, Node node, String hierarchyName) {
+        super(props, node, hierarchyName);
         this.spacer = spacer;
     }
 
@@ -58,7 +59,7 @@ public class DOMSpacer extends DOMItem {
     }
 
     @Override
-    protected void render() {
+    protected void setup() {
 
     }
 }

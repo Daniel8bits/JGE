@@ -1,5 +1,6 @@
 package game.engine.ui.dom.layouts;
 
+import game.engine.ui.dom.elements.DOMCustomElement;
 import game.engine.ui.dom.elements.DOMElement;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.dom.spacers.DOMSpacer;
@@ -17,8 +18,8 @@ public abstract class DOMLayout<T extends QLayout> extends DOMItem {
     @Getter
     private T layout;
 
-    public DOMLayout(T layout, Node node, String hierarchyName) {
-        super(node, hierarchyName);
+    public DOMLayout(T layout, IProps props, Node node, String hierarchyName) {
+        super(props, node, hierarchyName);
         this.layout = layout;
     }
 
@@ -78,7 +79,7 @@ public abstract class DOMLayout<T extends QLayout> extends DOMItem {
     }
 
     @Override
-    protected void render() {
+    protected void setup() {
 
     }
 

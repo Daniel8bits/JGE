@@ -1,8 +1,10 @@
 package game.engine.ui.dom.layouts;
 
+import game.engine.ui.dom.elements.DOMCustomElement;
 import game.engine.ui.dom.elements.DOMElement;
 import game.engine.ui.dom.nodes.DOMElementFacade;
 import game.engine.ui.dom.spacers.DOMSpacer;
+import game.engine.ui.framework.interfaces.IProps;
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QWidget;
 import org.w3c.dom.Node;
@@ -11,8 +13,8 @@ public class DOMGridLayout extends DOMLayout<QGridLayout> {
 
     public final static String TAG_NAME = DOMLayout.PREFIX + "grid";
 
-    public DOMGridLayout(Node node, String hierarchyName) {
-        super(new QGridLayout(), node, hierarchyName);
+    public DOMGridLayout(IProps props, Node node, String hierarchyName) {
+        super(new QGridLayout(), props, node, hierarchyName);
     }
 
     @Override
