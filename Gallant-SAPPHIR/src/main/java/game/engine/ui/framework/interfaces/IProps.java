@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IProps {
     void setChildren(List<DOMTemplate> children);
+    List<DOMTemplate> getChildren();
 }

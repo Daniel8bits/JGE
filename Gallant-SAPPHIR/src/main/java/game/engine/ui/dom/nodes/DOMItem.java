@@ -1,7 +1,6 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.dom.DOMTemplate;
-import game.engine.ui.dom.elements.DOMCustomElement;
 import game.engine.ui.framework.StateManager;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
@@ -10,19 +9,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class DOMItem extends DOMNode<DOMItem> {
-
-    @Props
-    public static class DOMItemProps implements IProps {
-        public int[] cell;
-
-        @Setter
-        public List<DOMTemplate> children;
-    }
 
     @Getter
     private String hierarchyName;
@@ -31,28 +21,17 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     private final int MAX_UPDATE_CYCLES = 100;
     private int updateCycles;
 
-    public DOMItem(IProps props, Node node, String hierarchyName) {
-        super(node);
+    public DOMItem(IProps props, String hierarchyName) {
+        super();
         this.hierarchyName = hierarchyName;
-        this.stateManager = new StateManager(this, getNode(), props);
+        this.stateManager = new StateManager(this, props);
         this.updateCycles = 0;
-    }
-
-    public abstract void pack();
-    protected void initializeComponent() {
-        this.getChildren().forEach(DOMItem::initializeComponent);
-    }
-    protected void recalculateBounds() {
-        this.getChildren().forEach(DOMItem::recalculateBounds);
     }
 
     protected abstract void whenMounted();
     protected abstract void whenUpdated(IProps previousProps, IStates previousStates);
     protected abstract void whenUnmounted();
-
-    protected abstract void setup();
-
-    protected IProps props() {
+    public IProps props() {
         return stateManager.getProps();
     }
 
@@ -63,7 +42,6 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     protected void set(IStates states) {
         if(!stateManager.equalsStates(states)) {
             stateManager.setStates(states);
-            whenUpdated(stateManager.getPreviousProps(), stateManager.getPreviousState());
             doUpdates();
         }
     }
@@ -82,7 +60,7 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
         whenUpdated(stateManager.getPreviousProps(), stateManager.getPreviousState());
         updateCycles--;
         if(updateCycles == 0) {
-            setup();
+            //setup();
         }
     }
 
@@ -118,6 +96,6 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     }
 
     protected DOMTemplate $(Class<? extends DOMItem> type, Consumer<IProps> props, DOMTemplate[] children) {
-        return null;
+        return new DOMTemplate(type, props, children);
     }
 }

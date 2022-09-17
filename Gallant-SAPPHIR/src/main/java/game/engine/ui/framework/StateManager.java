@@ -13,12 +13,12 @@ public class StateManager {
 
     private IProps props, previousProps;
     private IStates states, previousStates;
-    private Node node;
+    private DOMItem domItem;
 
-    public StateManager(DOMItem domItem, Node node, IProps props) {
-        this.node = node;
+    public StateManager(DOMItem domItem, IProps props) {
         this.props = props;
-        initialize(domItem);
+        this.domItem = domItem;
+        initialize();
     }
 
     public void setProps(IProps props) {
@@ -47,23 +47,8 @@ public class StateManager {
         return cloneStates(previousStates);
     }
 
-    @SuppressWarnings("unchecked")
-    private void initialize(DOMItem domItem) {
+    private void initialize() {
         Class<?> domItemClass = domItem.getClass();
-/*
-        Arrays.stream(domItemClass.getClasses())
-                .filter(clazz -> Arrays.stream(clazz.getAnnotations()).anyMatch(annotation -> annotation instanceof Props))
-                .findFirst()
-                .ifPresent(propsClass -> {
-                    try {
-                        props = (IProps) propsClass.getConstructor(new Class<?>[0]).newInstance(new Object[0]);
-                        previousProps = cloneProps(props);
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                             NoSuchMethodException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-*/
         previousProps = cloneProps(props);
 
         Arrays.stream(domItemClass.getClasses())
@@ -78,8 +63,6 @@ public class StateManager {
                         throw new RuntimeException(e);
                     }
                 });
-
-        //new DOMInterpreter(this).loadProps(domItem, node, props);
 
     }
 
@@ -135,7 +118,7 @@ public class StateManager {
         return equalsProps(props, a);
     }
 
-    public boolean equalsProps(IProps a, IProps b) {
+    public static boolean equalsProps(IProps a, IProps b) {
         if(!a.getClass().isInstance(b)) {
             throw new RuntimeException("Props are not of the same type!");
         }
@@ -154,7 +137,7 @@ public class StateManager {
         return equalsStates(states, a);
     }
 
-    public boolean equalsStates(IStates a, IStates b) {
+    public static boolean equalsStates(IStates a, IStates b) {
         if(!a.getClass().isInstance(b)) {
             throw new RuntimeException("Props are not of the same type!");
         }

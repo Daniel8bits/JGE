@@ -21,8 +21,7 @@ public abstract class DOMNode<T extends DOMNode<?>> {
     @Setter
     private DOMNode<?> parent;
 
-    public DOMNode(Node node) {
-        this.node = node;
+    public DOMNode() {
         this.children = new ArrayList<>();
     }
 

@@ -1,35 +1,47 @@
 package game.engine.ui.dom;
 
-import game.engine.ui.dom.elements.*;
-import game.engine.ui.dom.layouts.DOMGridLayout;
-import game.engine.ui.dom.layouts.DOMHorizontalLayout;
-import game.engine.ui.dom.layouts.DOMLayout;
-import game.engine.ui.dom.layouts.DOMVerticalLayout;
 import game.engine.ui.dom.nodes.DOMItem;
-import game.engine.ui.dom.spacers.DOMHorizontalSpacer;
-import game.engine.ui.dom.spacers.DOMSpacer;
-import game.engine.ui.dom.spacers.DOMVerticalSpacer;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShadowDOM {
 
-    private DOMTemplate domTemplate;
-    private DOMItem root;
+    private DOMItem rootComponent;
+    private DOMItem originalTree;
+    private DOMItem diffingTree;
 
-    public ShadowDOM(DOMTemplate domTemplate) {
-        this.domTemplate = domTemplate;
-        root = generateDOMItem(domTemplate, domTemplate.getType().getSimpleName());
+    private static ShadowDOM instance;
+
+    private ShadowDOM() {
     }
 
-    public void pack() {
-
+    public static ShadowDOM getInstance() {
+        if(instance == null) {
+            instance = new ShadowDOM();
+        }
+        return instance;
     }
+
+    public static void render(DOMTemplate domTemplate) {
+        getInstance().startRendering(domTemplate);
+    }
+
+    private void startRendering(DOMTemplate template) {
+        //root = generateDOMItem(domTemplate, domTemplate.getType().getSimpleName());
+        rootComponent = newDOMItem(template, newProps(template), template.getType().getSimpleName());
+    }
+
+    public static DOMItem createItem(DOMTemplate template) {
+        return getInstance().newDOMItem(template, getInstance().newProps(template), template.getType().getSimpleName());
+    }
+
+    /*****************************
+        SHADOWDOM GENERATION
+    ******************************/
 
     private DOMItem generateDOMItem(DOMTemplate template, String hierarchyName) {
         DOMItem item = newDOMItem(template, newProps(template), hierarchyName);
@@ -41,60 +53,17 @@ public class ShadowDOM {
     }
 
     private DOMItem newDOMItem(DOMTemplate template, IProps props, String hierarchyName) {
-        Class<? extends DOMItem> type = getBaseClassOf(template);
-        if (type == DOMElement.class) {
-            return newDOMElement(template, props, hierarchyName);
-        } else if (type == DOMLayout.class) {
-            return newDOMLayout(template, props, hierarchyName);
-        } else if (type == DOMSpacer.class) {
-            return newDOMSpacer(template, props, hierarchyName);
+        DOMItem domItem = null;
+        try {
+            domItem = (DOMItem) template.getType().getConstructors()[0].newInstance(props, hierarchyName);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
         }
-        return null;
-    }
-
-    private DOMElement<?> newDOMElement(DOMTemplate template, IProps props, String hierarchyName) {
-        if (template.getType() == DOMDivElement.class) {
-            return new DOMDivElement(props, null, hierarchyName);
-        } else if (template.getType() == DOMTextFieldElement.class) {
-            return new DOMTextFieldElement(props, null, hierarchyName);
-        } else if (template.getType() == DOMButtonElement.class) {
-            return new DOMButtonElement(props, null, hierarchyName);
-        } else if (template.getType() == DOMComboBoxElement.class) {
-            return new DOMComboBoxElement(props, null, hierarchyName);
-        } else if (template.getType() == DOMLabelElement.class) {
-            return new DOMLabelElement(props, null, hierarchyName);
-        } else if (template.getType() == DOMCheckBoxElement.class) {
-            return new DOMCheckBoxElement(props, null, hierarchyName);
-        }
-        return null;
-    }
-
-    private DOMLayout<?> newDOMLayout(DOMTemplate template, IProps props, String hierarchyName) {
-        if (template.getType() == DOMHorizontalLayout.class) {
-            return new DOMHorizontalLayout(props, null, hierarchyName);
-        } else if (template.getType() == DOMVerticalLayout.class) {
-            return new DOMVerticalLayout(props, null, hierarchyName);
-        } else if (template.getType() == DOMGridLayout.class) {
-            return new DOMGridLayout(props, null, hierarchyName);
-        }
-        return null;
-    }
-
-    private DOMSpacer newDOMSpacer(DOMTemplate template, IProps props, String hierarchyName) {
-        if (template.getType() == DOMHorizontalSpacer.class) {
-            return new DOMHorizontalSpacer(props, null, hierarchyName);
-        } else if (template.getType() == DOMVerticalSpacer.class) {
-            return new DOMVerticalSpacer(props, null, hierarchyName);
-        }
-        return null;
-    }
-
-    private Class<? extends DOMItem> getBaseClassOf(DOMTemplate template) {
-        Class<?> superClass = template.getType();
-        while(superClass.getGenericSuperclass() != DOMItem.class) {
-            superClass = (Class<?>) superClass.getGenericSuperclass();
-        }
-        return (Class<? extends DOMItem>) superClass;
+        return domItem;
     }
 
     private IProps newProps(DOMTemplate template) {

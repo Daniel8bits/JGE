@@ -1,15 +1,18 @@
 package game.engine.ui.test;
 
 import game.engine.ui.dom.DOMTemplate;
-import game.engine.ui.dom.elements.*;
+import game.engine.ui.dom.nodes.DOMCustomElement;
 import game.engine.ui.framework.interfaces.IProps;
-import org.w3c.dom.Node;
+import game.engine.ui.qt.DOMQtWidget;
+import game.engine.ui.qt.elements.DOMButtonElement;
+import game.engine.ui.qt.elements.DOMDivElement;
+import game.engine.ui.qt.elements.DOMLabelElement;
 
 public class TestComponent extends DOMCustomElement {
 
 
-    public TestComponent(IProps props, Node node, String hierarchyName) {
-        super(props, node, hierarchyName);
+    public TestComponent(IProps props, String hierarchyName) {
+        super(props, hierarchyName);
     }
 
     @Override
@@ -17,7 +20,7 @@ public class TestComponent extends DOMCustomElement {
         return $(
             DOMDivElement.class,
             props -> {
-                DOMElement.DOMElementProps p = (DOMElement.DOMElementProps) props;
+                DOMQtWidget.DOMQtWidgetProps p = (DOMQtWidget.DOMQtWidgetProps) props;
                 p.layout = "horizontal";
             },
             new DOMTemplate[] {

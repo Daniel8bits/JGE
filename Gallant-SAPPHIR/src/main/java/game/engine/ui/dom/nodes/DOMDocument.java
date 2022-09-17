@@ -1,7 +1,7 @@
 package game.engine.ui.dom.nodes;
 
-import game.engine.ui.components.MainWindow;
-import game.engine.ui.dom.elements.DOMBody;
+import game.engine.ui.qt.components.MainWindow;
+import game.engine.ui.qt.elements.DOMBody;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
