@@ -1,27 +1,31 @@
 package game.engine.ui.dom;
 
+import game.engine.ui.dom.nodes.DOMAtomicElement;
+import game.engine.ui.dom.nodes.DOMElement;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class ShadowDOM {
+public class Sapphire {
 
-    private DOMItem rootComponent;
-    private DOMItem originalTree;
+    private DOMElement rootComponent;
+    private DOMAtomicElement originalTree;
     private DOMItem diffingTree;
 
-    private static ShadowDOM instance;
+    private static Sapphire instance;
 
-    private ShadowDOM() {
+    private Sapphire() {
     }
 
-    public static ShadowDOM getInstance() {
+    public static Sapphire getInstance() {
         if(instance == null) {
-            instance = new ShadowDOM();
+            instance = new Sapphire();
         }
         return instance;
     }
@@ -31,31 +35,40 @@ public class ShadowDOM {
     }
 
     private void startRendering(DOMTemplate template) {
-        //root = generateDOMItem(domTemplate, domTemplate.getType().getSimpleName());
-        rootComponent = newDOMItem(template, newProps(template), template.getType().getSimpleName());
+        rootComponent = newDOMElement(template, newProps(template), template.getType().getSimpleName());
+        originalTree = rootComponent.getAtomicElements().get(0);
     }
 
-    public static DOMItem createItem(DOMTemplate template) {
-        return getInstance().newDOMItem(template, getInstance().newProps(template), template.getType().getSimpleName());
+    public static DOMElement createElement(DOMTemplate template) {
+        return getInstance().newDOMElement(template, getInstance().newProps(template), template.getType().getSimpleName());
+    }
+
+    public static List<DOMElement> createElements(List<DOMTemplate> templates) {
+        Sapphire sapphire = getInstance();
+        ArrayList<DOMElement> elements = new ArrayList<>();
+        templates.forEach(t -> {
+            elements.add(sapphire.newDOMElement(t, sapphire.newProps(t), t.getType().getSimpleName()));
+        });
+        return elements;
     }
 
     /*****************************
         SHADOWDOM GENERATION
     ******************************/
 
-    private DOMItem generateDOMItem(DOMTemplate template, String hierarchyName) {
-        DOMItem item = newDOMItem(template, newProps(template), hierarchyName);
+    private DOMElement generateDOMElement(DOMTemplate template, String hierarchyName) {
+        DOMElement item = newDOMElement(template, newProps(template), hierarchyName);
         Arrays.stream(template.getChildren())
                 .forEach(child -> {
-                    item.getChildren().add(generateDOMItem(child, template.getType().getSimpleName()));
+                    item.getChildren().add(generateDOMElement(child, template.getType().getSimpleName()));
                 });
         return item;
     }
 
-    private DOMItem newDOMItem(DOMTemplate template, IProps props, String hierarchyName) {
-        DOMItem domItem = null;
+    private DOMElement newDOMElement(DOMTemplate template, IProps props, String hierarchyName) {
+        DOMElement domElement = null;
         try {
-            domItem = (DOMItem) template.getType().getConstructors()[0].newInstance(props, hierarchyName);
+            domElement = (DOMElement) template.getType().getConstructors()[0].newInstance(props, hierarchyName);
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
@@ -63,7 +76,7 @@ public class ShadowDOM {
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-        return domItem;
+        return domElement;
     }
 
     private IProps newProps(DOMTemplate template) {

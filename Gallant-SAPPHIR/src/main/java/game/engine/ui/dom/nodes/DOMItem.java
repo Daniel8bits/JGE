@@ -69,6 +69,10 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     }
 
 
+    /**
+     * TODO: Suporte para comparação de arrays
+     * @see <a href="https://stackoverflow.com/questions/23500237/how-to-get-set-array-element-with-reflection">referencia</a>
+     */
     protected boolean notEquals(Object a, Object b) {
         if(a == null && b == null) {
             return false;
@@ -79,6 +83,9 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
         if(a == null && b != null) {
             return true;
         }
+
+        // TODO HERE
+
         return !a.equals(b);
     }
 

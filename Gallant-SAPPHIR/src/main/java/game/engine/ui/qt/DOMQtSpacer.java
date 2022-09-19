@@ -6,7 +6,7 @@ import game.engine.ui.qt.components.ISpacerComponent;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QSpacerItem;
 
-public class DOMQtSpacer<T extends ISpacerComponent> extends DOMQtElement<T> {
+public abstract class DOMQtSpacer<T extends ISpacerComponent> extends DOMQtElement<T> {
 
     public DOMQtSpacer(IProps props, String hierarchyName) {
         super(props, hierarchyName);

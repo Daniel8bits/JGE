@@ -1,21 +1,15 @@
 package game.engine.ui.qt.elements;
 
+import game.engine.ui.framework.annotations.Childrenless;
+import game.engine.ui.qt.DOMQtWidget;
 import game.engine.ui.qt.components.widgets.Label;
-import game.engine.ui.dom.nodes.DOMAtomicElement;
 import game.engine.ui.framework.interfaces.IProps;
-import org.w3c.dom.Node;
 
-public class DOMLabelElement extends DOMAtomicElement<Label> {
-
-    public final static String TAG_NAME = "label";
-
-    public DOMLabelElement(IProps props, Node node, String hierarchyName) {
-        super(new Label(), props,  node, hierarchyName);
+@Childrenless
+public class DOMLabelElement extends DOMQtWidget<Label> {
+    public DOMLabelElement(IProps props, String hierarchyName) {
+        super(props, hierarchyName);
+        setComponent(new Label());
     }
 
-    @Override
-    protected void initializeComponent() {
-        this.getComponent().setText(this.getNode().getTextContent());
-        super.initializeComponent();
-    }
 }

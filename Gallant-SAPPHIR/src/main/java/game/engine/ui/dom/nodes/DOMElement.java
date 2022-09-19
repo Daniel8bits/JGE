@@ -1,12 +1,13 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.dom.DOMTemplate;
+import game.engine.ui.framework.annotations.Childrenless;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
 import lombok.Getter;
 import lombok.Setter;
-import org.w3c.dom.Node;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class DOMElement extends DOMItem {
@@ -18,7 +19,17 @@ public abstract class DOMElement extends DOMItem {
         public List<DOMTemplate> children;
     }
 
+    @Setter
+    @Getter
+    private List<DOMElement> shadowDom;
+
+    final public boolean CHILDRENLESS;
+
     public DOMElement(IProps props, String hierarchyName) {
         super(props, hierarchyName);
+        CHILDRENLESS = Arrays.stream(this.getClass().getAnnotations()).anyMatch(annotation -> annotation.annotationType() == Childrenless.class);
     }
+
+    public abstract List<DOMAtomicElement<?>> getAtomicElements();
+
 }

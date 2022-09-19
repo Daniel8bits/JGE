@@ -4,66 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="remodeling dom builder + implementing custom component system">
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/IComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/Childrenless.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtWidget.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/ILayoutComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/ISpacerComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/layouts/GridLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/layouts/HorizontalLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/layouts/VerticalLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/spacers/HorizontalSpacer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/spacers/VerticalSpacer.java" afterDir="false" />
+    <list default="true" id="f7307a9a-6d49-4215-bb84-5cb857e0d945" name="Changes" comment="new nodes class structure + cleaned unuseful classes">
+      <change afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/IDOMQtElementHandleLayout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/CheckBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/CheckBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/ComboBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/ComboBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/Div.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/Div.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/IComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/IWidgetComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/components/TextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/components/widgets/TextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/DOMInterpreter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/DOMManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/DOMTemplateArray.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/ShadowDOM.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/ShadowDOM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/VirtualDOM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/VirtualDOMFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMButtonElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMButtonElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMCheckBoxElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMCheckBoxElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMComboBoxElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMComboBoxElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMCustomElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMCustomElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMDivElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMDivElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMAtomicElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMLabelElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMLabelElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/elements/DOMTextFieldElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMTextFieldElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMGridLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/layouts/DOMGridLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMHorizontalLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/layouts/DOMHorizontalLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/layouts/DOMVerticalLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/layouts/DOMVerticalLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/ShadowDOM.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/Sapphire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMAtomicElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMAtomicElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMCustomElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMCustomElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMDocument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMElementFacade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/nodes/DOMNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/spacers/DOMHorizontalSpacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/spacers/DOMHorizontalSpacer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/spacers/DOMSpacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtSpacer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/dom/spacers/DOMVerticalSpacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/spacers/DOMVerticalSpacer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/StateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/StateType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/annotations/StateValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IProps.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IProps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/IState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Propless.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Stateful.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/framework/interfaces/Stateless.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/parser/XMLParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/test/TestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/test/TestComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/test/UITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/test/UITest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtSpacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtSpacer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/DOMQtWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMBody.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMButtonElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMButtonElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMCheckBoxElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMCheckBoxElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMComboBoxElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMComboBoxElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMDivElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMDivElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMLabelElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMLabelElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMTextFieldElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gallant-SAPPHIR/src/main/java/game/engine/ui/qt/elements/DOMTextFieldElement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,10 +33,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Kotlin Class" />
-        <option value="Interface" />
         <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Kotlin Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -264,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661325803621</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="new nodes class structure + cleaned unuseful classes">
+      <created>1663403430932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663403430932</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,7 +256,8 @@
     <MESSAGE value="added some lifecycle logic stuff" />
     <MESSAGE value="added literal values injection on props" />
     <MESSAGE value="remodeling dom builder + implementing custom component system" />
-    <option name="LAST_COMMIT_MESSAGE" value="remodeling dom builder + implementing custom component system" />
+    <MESSAGE value="new nodes class structure + cleaned unuseful classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="new nodes class structure + cleaned unuseful classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

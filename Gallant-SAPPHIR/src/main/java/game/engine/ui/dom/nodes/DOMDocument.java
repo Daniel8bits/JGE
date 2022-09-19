@@ -1,7 +1,6 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.qt.components.MainWindow;
-import game.engine.ui.qt.elements.DOMBody;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +13,7 @@ public class DOMDocument implements IManageableNode {
 
     private Document document;
     private DOMHeader header;
-    private DOMBody body;
+    //private DOMBody body;
 
     @Override
     public void update() {
@@ -27,11 +26,11 @@ public class DOMDocument implements IManageableNode {
 
 
         window.resize(800, 500);
-        body.getComponent().setLayout("horizontal");
-        body.pack();
-        body.initializeComponent();
+        //body.getComponent().setLayout("horizontal");
+        //body.pack();
+        //body.initializeComponent();
 
-        window.setCentralWidget(body.getComponent());
+        //window.setCentralWidget(body.getComponent());
         window.show();
 
         //window.setStyleSheet("QMainWindow {background-color: red;}");
@@ -39,7 +38,7 @@ public class DOMDocument implements IManageableNode {
     }
 
     public void recalculateBounds() {
-        body.recalculateBounds();
+        //body.recalculateBounds();
     }
 
 }

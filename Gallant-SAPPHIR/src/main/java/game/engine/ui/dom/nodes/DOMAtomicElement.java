@@ -1,18 +1,17 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.dom.IComponent;
-import game.engine.ui.dom.ShadowDOM;
+import game.engine.ui.dom.Sapphire;
 import game.engine.ui.framework.annotations.Childrenless;
-import game.engine.ui.framework.annotations.Props;
-import game.engine.ui.framework.annotations.States;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
 import lombok.Getter;
-import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public abstract class DOMAtomicElement<T extends IComponent> extends DOMItem {
+public abstract class DOMAtomicElement<T extends IComponent> extends DOMElement {
 
     @Getter
     private T component;
@@ -24,11 +23,23 @@ public abstract class DOMAtomicElement<T extends IComponent> extends DOMItem {
 
     public DOMAtomicElement(IProps props, String hierarchyName) {
         super(props, hierarchyName);
-        if(Arrays.stream(this.getClass().getAnnotations()).noneMatch(annotation -> annotation.annotationType() == Childrenless.class)) {
-            props.getChildren().forEach(child -> {
-                this.getChildren().add(ShadowDOM.createItem(child));
+        if(!CHILDRENLESS) {
+            setShadowDom(Sapphire.createElements(props.getChildren()));
+        }
+    }
+
+    @Override
+    public List<DOMAtomicElement<?>> getAtomicElements() {
+        List<DOMAtomicElement<?>> elements = new ArrayList<>();
+        elements.add(this);
+        if(CHILDRENLESS) {
+            getShadowDom().forEach(e -> {
+                List<DOMAtomicElement<?>> children = e.getAtomicElements();
+                children.forEach(child -> child.setParent(this));
+                getChildren().addAll(children);
             });
         }
+        return elements;
     }
 
     public abstract void pack();
