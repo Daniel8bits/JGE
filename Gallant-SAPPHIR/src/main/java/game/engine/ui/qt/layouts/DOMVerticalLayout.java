@@ -7,7 +7,7 @@ import io.qt.widgets.QVBoxLayout;
 import org.w3c.dom.Node;
 
 public class DOMVerticalLayout extends DOMQtLayout<VerticalLayout> {
-    public DOMVerticalLayout(IProps props, Node node, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMVerticalLayout() {
+        setComponent(new VerticalLayout());
     }
 }

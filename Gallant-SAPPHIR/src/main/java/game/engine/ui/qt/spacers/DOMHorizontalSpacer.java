@@ -8,7 +8,7 @@ import io.qt.widgets.QSpacerItem;
 import org.w3c.dom.Node;
 
 public class DOMHorizontalSpacer extends DOMQtSpacer<HorizontalSpacer> {
-    public DOMHorizontalSpacer(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMHorizontalSpacer() {
+        setComponent(new HorizontalSpacer(0, 0));
     }
 }

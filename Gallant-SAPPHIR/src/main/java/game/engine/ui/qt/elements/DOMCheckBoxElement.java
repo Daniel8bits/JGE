@@ -8,8 +8,7 @@ import game.engine.ui.framework.interfaces.IProps;
 @Childrenless
 public class DOMCheckBoxElement extends DOMQtWidget<CheckBox> {
 
-    public DOMCheckBoxElement(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMCheckBoxElement() {
         setComponent(new CheckBox());
     }
 

@@ -1,7 +1,9 @@
-package game.engine.ui.qt.components;
+package game.engine.ui.qt.components.containers;
 
+import game.engine.ui.dom.IContainer;
 import game.engine.ui.events.*;
 import game.engine.ui.events.management.EventManager;
+import game.engine.ui.qt.components.IWidgetComponent;
 import io.qt.core.QChildEvent;
 import io.qt.core.QEvent;
 import io.qt.core.QTimerEvent;
@@ -9,7 +11,7 @@ import io.qt.core.Qt;
 import io.qt.gui.*;
 import io.qt.widgets.QMainWindow;
 
-public class MainWindow extends QMainWindow implements IWidgetComponent {
+public class MainWindow extends QMainWindow implements IContainer {
 
     private EventManager eventManager;
 

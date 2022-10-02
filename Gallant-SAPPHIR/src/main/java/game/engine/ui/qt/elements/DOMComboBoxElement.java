@@ -8,8 +8,7 @@ import game.engine.ui.framework.interfaces.IProps;
 @Childrenless
 public class DOMComboBoxElement extends DOMQtWidget<ComboBox> {
 
-    public DOMComboBoxElement(IProps props, String parentHierarchyName) {
-        super(props, parentHierarchyName);
+    public DOMComboBoxElement() {
         setComponent(new ComboBox());
     }
 }

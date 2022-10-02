@@ -13,10 +13,6 @@ import lombok.val;
 public abstract class DOMQtLayout<T extends ILayoutComponent> extends DOMQtElement<T>
     implements IDOMQtElementHandleLayout {
 
-    public DOMQtLayout(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
-    }
-
     @Override
     public void pack() {
         getChildren().forEach(domItem -> {
@@ -46,7 +42,7 @@ public abstract class DOMQtLayout<T extends ILayoutComponent> extends DOMQtEleme
 
     @Override
     protected void whenMounted() {
-        DOMQtWidget.DOMQtWidgetProps props = (DOMQtWidget.DOMQtWidgetProps) props();
+        val props = (DOMQtElement.DOMQtElementProps) props();
         if(getParent() instanceof IDOMQtElementHandleLayout) {
             val parent = (IDOMQtElementHandleLayout) getParent();
             parent.addChild(this, props.cell);

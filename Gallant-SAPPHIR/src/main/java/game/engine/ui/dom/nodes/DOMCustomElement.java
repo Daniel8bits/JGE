@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DOMCustomElement extends DOMElement {
-    public DOMCustomElement(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
-        setShadowDom(new ArrayList<>());
-        getShadowDom().add(Sapphire.createElement(render()));
+
+    @Override
+    public void init(IProps props, String hierarchyName) {
+        super.init(props, hierarchyName);
+        getShadowDom().add(new Sapphire().createElement(render()));
     }
 
     public List<DOMAtomicElement<?>> getAtomicElements() {

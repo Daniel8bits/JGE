@@ -2,36 +2,24 @@ package game.engine.ui.test;
 
 import game.engine.ui.dom.DOMTemplate;
 import game.engine.ui.dom.nodes.DOMCustomElement;
-import game.engine.ui.framework.interfaces.IProps;
-import game.engine.ui.qt.DOMQtWidget;
-import game.engine.ui.qt.elements.DOMButtonElement;
-import game.engine.ui.qt.elements.DOMDivElement;
-import game.engine.ui.qt.elements.DOMLabelElement;
+import game.engine.ui.qt.DOMQtElement;
+import game.engine.ui.qt.elements.DOMCheckBoxElement;
+import game.engine.ui.qt.layouts.DOMHorizontalLayout;
+import game.engine.ui.qt.spacers.DOMHorizontalSpacer;
+import lombok.val;
 
 public class TestComponent extends DOMCustomElement {
-
-
-    public TestComponent(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
-    }
-
     @Override
     public DOMTemplate render() {
-        return $(
-            DOMDivElement.class,
+        return
+        $(DOMHorizontalLayout.class,
             props -> {
-                DOMQtWidget.DOMQtWidgetProps p = (DOMQtWidget.DOMQtWidgetProps) props;
-                p.layout = "horizontal";
+                val p = (DOMQtElement.DOMQtElementProps) props;
+                p.cell = new int[] {2, 1};
             },
-            new DOMTemplate[] {
-                $(DOMButtonElement.class,
-                    props -> {
-
-                    }
-                ),
-                $(DOMLabelElement.class),
-                $(DOMButtonElement.class),
-            }
+            $(DOMCheckBoxElement.class),
+            $(DOMCheckBoxElement.class),
+            $(DOMHorizontalSpacer.class)
         );
     }
 }

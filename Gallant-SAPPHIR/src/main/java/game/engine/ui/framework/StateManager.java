@@ -8,6 +8,7 @@ import org.w3c.dom.Node;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class StateManager {
 
@@ -15,10 +16,10 @@ public class StateManager {
     private IStates states, previousStates;
     private DOMItem domItem;
 
-    public StateManager(DOMItem domItem, IProps props) {
+    public StateManager(DOMItem domItem, IProps props, Consumer<IStates> defaultStates) {
         this.props = props;
         this.domItem = domItem;
-        initialize();
+        initialize(defaultStates);
     }
 
     public void setProps(IProps props) {
@@ -47,7 +48,7 @@ public class StateManager {
         return cloneStates(previousStates);
     }
 
-    private void initialize() {
+    private void initialize(Consumer<IStates> defaultStates) {
         Class<?> domItemClass = domItem.getClass();
         previousProps = cloneProps(props);
 

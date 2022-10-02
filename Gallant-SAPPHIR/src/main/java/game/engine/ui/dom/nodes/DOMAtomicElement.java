@@ -21,10 +21,11 @@ public abstract class DOMAtomicElement<T extends IComponent> extends DOMElement 
             - implementar o distribuidor de estilos CSS
     */
 
-    public DOMAtomicElement(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
-        if(!CHILDRENLESS) {
-            setShadowDom(Sapphire.createElements(props.getChildren()));
+    @Override
+    public void init(IProps props, String hierarchyName) {
+        super.init(props, hierarchyName);
+        if(!CHILDRENLESS && props.getChildren().size() > 0) {
+            setShadowDom(new Sapphire().createElements(props.getChildren()));
         }
     }
 
@@ -32,7 +33,7 @@ public abstract class DOMAtomicElement<T extends IComponent> extends DOMElement 
     public List<DOMAtomicElement<?>> getAtomicElements() {
         List<DOMAtomicElement<?>> elements = new ArrayList<>();
         elements.add(this);
-        if(CHILDRENLESS) {
+        if(!CHILDRENLESS) {
             getShadowDom().forEach(e -> {
                 List<DOMAtomicElement<?>> children = e.getAtomicElements();
                 children.forEach(child -> child.setParent(this));

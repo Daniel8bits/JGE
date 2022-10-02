@@ -20,13 +20,12 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
 
     @Props
     public static class DOMQtWidgetProps extends DOMQtElement.DOMQtElementProps {
-        public String layout;
+        public ELayoutType layout;
     }
 
     private final HashMap<DOMQtElement<?>, int[]> childrenCells;
 
-    public DOMQtWidget(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMQtWidget() {
         childrenCells = new HashMap<>();
     }
 
@@ -76,7 +75,11 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
 
     @Override
     protected void whenMounted() {
-        DOMQtWidgetProps props = (DOMQtWidgetProps) props();
+        val props = (DOMQtWidgetProps) props();
+        if(props.layout != null && props.layout != ELayoutType.NONE) {
+            getComponent().setLayout(ELayoutType.reduce(props.layout));
+            getChildren().forEach(child -> configureLayout((DOMQtElement<?>) child));
+        }
         if(getParent() instanceof IDOMQtElementHandleLayout) {
             val parent = (IDOMQtElementHandleLayout) getParent();
             parent.addChild(this, props.cell);
@@ -85,8 +88,8 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
 
     @Override
     protected void whenUpdated(IProps previousProps, IStates previousStates) {
-        DOMQtWidgetProps props = (DOMQtWidgetProps) props();
-        DOMQtWidgetProps pProps = (DOMQtWidgetProps) previousProps;
+        val props = (DOMQtWidgetProps) props();
+        val pProps = (DOMQtWidgetProps) previousProps;
         if(notEquals(pProps.layout, props.layout)) {
             getChildren().forEach(child -> configureLayout((DOMQtElement<?>) child));
         }
@@ -108,7 +111,11 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
             QGridLayout gridLayout = (QGridLayout) getComponent().layout();
             if(cell != null) {
                 domQtWidget.removeFromParentComponent();
-                gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }
@@ -123,7 +130,11 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
             QGridLayout gridLayout = (QGridLayout) getComponent().layout();
             if(cell != null) {
                 domQtLayout.removeFromParentComponent();
-                gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }
@@ -138,7 +149,11 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
             QGridLayout gridLayout = (QGridLayout) getComponent().layout();
             if(cell != null) {
                 domQtSpacer.removeFromParentComponent();
-                gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }

@@ -8,8 +8,7 @@ import game.engine.ui.framework.interfaces.IProps;
 @Childrenless
 public class DOMTextFieldElement extends DOMQtWidget<TextField> {
 
-    public DOMTextFieldElement(IProps props, String parentHierarchyName) {
-        super(props, parentHierarchyName);
+    public DOMTextFieldElement() {
         setComponent(new TextField());
     }
 

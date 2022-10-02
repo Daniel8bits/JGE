@@ -7,6 +7,7 @@ import game.engine.ui.framework.interfaces.IProps;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,11 +26,16 @@ public abstract class DOMElement extends DOMItem {
 
     final public boolean CHILDRENLESS;
 
-    public DOMElement(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMElement() {
+        shadowDom = new ArrayList<>();
         CHILDRENLESS = Arrays.stream(this.getClass().getAnnotations()).anyMatch(annotation -> annotation.annotationType() == Childrenless.class);
     }
 
     public abstract List<DOMAtomicElement<?>> getAtomicElements();
+
+    public void callWhenMounted() {
+        shadowDom.forEach(DOMElement::callWhenMounted);
+        whenMounted();
+    }
 
 }

@@ -7,8 +7,7 @@ import io.qt.widgets.QHBoxLayout;
 import org.w3c.dom.Node;
 
 public class DOMHorizontalLayout extends DOMQtLayout<HorizontalLayout> {
-
-    public DOMHorizontalLayout(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMHorizontalLayout() {
+        setComponent(new HorizontalLayout());
     }
 }

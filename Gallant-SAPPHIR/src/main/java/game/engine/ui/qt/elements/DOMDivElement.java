@@ -6,8 +6,7 @@ import game.engine.ui.framework.interfaces.IProps;
 
 public class DOMDivElement extends DOMQtWidget<Div> {
 
-    public DOMDivElement(IProps props, String parentHierarchyName) {
-        super(props, parentHierarchyName);
+    public DOMDivElement() {
         setComponent(new Div());
     }
 

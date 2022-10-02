@@ -17,14 +17,15 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     @Getter
     private String hierarchyName;
     private StateManager stateManager;
+    @Setter
+    private Consumer<IStates> defaultStates;
 
     private final int MAX_UPDATE_CYCLES = 100;
     private int updateCycles;
 
-    public DOMItem(IProps props, String hierarchyName) {
-        super();
+    public void init(IProps props, String hierarchyName) {
         this.hierarchyName = hierarchyName;
-        this.stateManager = new StateManager(this, props);
+        this.stateManager = new StateManager(this, props, defaultStates);
         this.updateCycles = 0;
     }
 
@@ -91,18 +92,18 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
 
 
     protected DOMTemplate $(Class<? extends DOMItem> type) {
-        return $(type, null, null);
+        return $(type, (Consumer<IProps>) null, (DOMTemplate) null);
     }
 
-    protected DOMTemplate $(Class<? extends DOMItem> type, DOMTemplate[] children) {
+    protected DOMTemplate $(Class<? extends DOMItem> type, DOMTemplate ...children) {
         return $(type, null, children);
     }
 
     protected DOMTemplate $(Class<? extends DOMItem> type, Consumer<IProps> props) {
-        return $(type, props, null);
+        return $(type, props, (DOMTemplate) null);
     }
 
-    protected DOMTemplate $(Class<? extends DOMItem> type, Consumer<IProps> props, DOMTemplate[] children) {
+    protected DOMTemplate $(Class<? extends DOMItem> type, Consumer<IProps> props, DOMTemplate ...children) {
         return new DOMTemplate(type, props, children);
     }
 }

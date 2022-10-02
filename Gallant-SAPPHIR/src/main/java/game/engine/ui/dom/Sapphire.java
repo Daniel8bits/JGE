@@ -1,6 +1,7 @@
 package game.engine.ui.dom;
 
 import game.engine.ui.dom.nodes.DOMAtomicElement;
+import game.engine.ui.dom.nodes.DOMContainer;
 import game.engine.ui.dom.nodes.DOMElement;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.framework.annotations.Props;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 public class Sapphire {
 
@@ -18,36 +20,38 @@ public class Sapphire {
     private DOMAtomicElement originalTree;
     private DOMItem diffingTree;
 
-    private static Sapphire instance;
-
-    private Sapphire() {
-    }
-
-    public static Sapphire getInstance() {
-        if(instance == null) {
-            instance = new Sapphire();
-        }
-        return instance;
-    }
-
-    public static void render(DOMTemplate domTemplate) {
-        getInstance().startRendering(domTemplate);
-    }
-
+    /*
     private void startRendering(DOMTemplate template) {
         rootComponent = newDOMElement(template, newProps(template), template.getType().getSimpleName());
         originalTree = rootComponent.getAtomicElements().get(0);
+        originalTree.callWhenMounted();
+    }
+    */
+
+    public DOMContainer<?> createRoot(Class<? extends DOMContainer> containerClass, Consumer<IProps> props) {
+        DOMContainer<?> container = null;
+        try {
+            container = (DOMContainer<?>) containerClass.getConstructors()[0].newInstance();
+            container.init(newProps(containerClass, props, new DOMTemplate[0]), containerClass.getSimpleName());
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return container;
     }
 
-    public static DOMElement createElement(DOMTemplate template) {
-        return getInstance().newDOMElement(template, getInstance().newProps(template), template.getType().getSimpleName());
+    public DOMElement createElement(DOMTemplate template) {
+        return newDOMElement(template, newProps(template), template.getType().getSimpleName());
     }
 
-    public static List<DOMElement> createElements(List<DOMTemplate> templates) {
-        Sapphire sapphire = getInstance();
+    public List<DOMElement> createElements(List<DOMTemplate> templates) {
         ArrayList<DOMElement> elements = new ArrayList<>();
         templates.forEach(t -> {
-            elements.add(sapphire.newDOMElement(t, sapphire.newProps(t), t.getType().getSimpleName()));
+            if(t == null) return;
+            elements.add(newDOMElement(t, newProps(t), t.getType().getSimpleName()));
         });
         return elements;
     }
@@ -68,7 +72,8 @@ public class Sapphire {
     private DOMElement newDOMElement(DOMTemplate template, IProps props, String hierarchyName) {
         DOMElement domElement = null;
         try {
-            domElement = (DOMElement) template.getType().getConstructors()[0].newInstance(props, hierarchyName);
+            domElement = (DOMElement) template.getType().getConstructors()[0].newInstance();
+            domElement.init(props, hierarchyName);
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
@@ -80,16 +85,20 @@ public class Sapphire {
     }
 
     private IProps newProps(DOMTemplate template) {
-        AtomicReference<IProps> props = null;
+        return newProps(template.getType(), template.getProps(), template.getChildren());
+    }
 
-        Arrays.stream(template.getType().getClasses())
+    private IProps newProps(Class<? extends DOMItem> type, Consumer<IProps> propsConsumer, DOMTemplate[] children) {
+        AtomicReference<IProps> props = new AtomicReference<>();
+
+        Arrays.stream(type.getClasses())
                 .filter(clazz -> Arrays.stream(clazz.getAnnotations()).anyMatch(annotation -> annotation instanceof Props))
                 .findFirst()
                 .ifPresent(propsClass -> {
                     try {
                         IProps p = (IProps) propsClass.getConstructor(new Class<?>[0]).newInstance(new Object[0]);
-                        template.getProps().accept(p);
-                        p.setChildren(Arrays.asList(template.getChildren()));
+                        if(propsConsumer != null) propsConsumer.accept(p);
+                        p.setChildren(children != null ? Arrays.asList(children) : new ArrayList<>());
                         props.set(p);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {

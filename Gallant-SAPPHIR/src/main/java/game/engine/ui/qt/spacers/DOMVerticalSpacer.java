@@ -8,7 +8,7 @@ import io.qt.widgets.QSpacerItem;
 import org.w3c.dom.Node;
 
 public class DOMVerticalSpacer extends DOMQtSpacer<VerticalSpacer> {
-    public DOMVerticalSpacer(IProps props, String hierarchyName) {
-        super(props, hierarchyName);
+    public DOMVerticalSpacer() {
+        setComponent(new VerticalSpacer(0, 0));
     }
 }

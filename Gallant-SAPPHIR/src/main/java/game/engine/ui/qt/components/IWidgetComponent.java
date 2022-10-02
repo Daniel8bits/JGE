@@ -54,8 +54,6 @@ public interface IWidgetComponent extends IComponent {
             setLayout(new QVBoxLayout());
         }
     }
-
-    EventManager getEventManager();
     QLayout layout();
     void resize(int width, int height);
     void move(int x, int y);

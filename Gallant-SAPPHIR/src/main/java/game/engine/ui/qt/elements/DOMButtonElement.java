@@ -8,8 +8,7 @@ import game.engine.ui.framework.interfaces.IProps;
 @Childrenless
 public class DOMButtonElement extends DOMQtWidget<Button> {
 
-    public DOMButtonElement(IProps props, String parentHierarchyName) {
-        super(props, parentHierarchyName);
+    public DOMButtonElement() {
         setComponent(new Button());
     }
 
