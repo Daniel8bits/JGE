@@ -33,9 +33,16 @@ public abstract class DOMElement extends DOMItem {
 
     public abstract List<DOMAtomicElement<?>> getAtomicElements();
 
+    @Override
     public void callWhenMounted() {
         shadowDom.forEach(DOMElement::callWhenMounted);
         whenMounted();
+    }
+
+    @Override
+    public void callWhenUnmounted() {
+        shadowDom.forEach(DOMElement::callWhenUnmounted);
+        whenUnmounted();
     }
 
 }

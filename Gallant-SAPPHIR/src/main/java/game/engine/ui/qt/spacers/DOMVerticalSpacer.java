@@ -9,6 +9,6 @@ import org.w3c.dom.Node;
 
 public class DOMVerticalSpacer extends DOMQtSpacer<VerticalSpacer> {
     public DOMVerticalSpacer() {
-        setComponent(new VerticalSpacer(0, 0));
+        setComponent(new VerticalSpacer(20, 40));
     }
 }

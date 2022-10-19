@@ -19,4 +19,6 @@ public abstract class DOMQtElement<T extends IComponent> extends DOMAtomicElemen
         public String test;
     }
 
+    public abstract void removeFromParentComponent();
+
 }

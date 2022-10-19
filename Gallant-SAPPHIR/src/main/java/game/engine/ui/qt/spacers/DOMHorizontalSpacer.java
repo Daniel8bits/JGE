@@ -9,6 +9,6 @@ import org.w3c.dom.Node;
 
 public class DOMHorizontalSpacer extends DOMQtSpacer<HorizontalSpacer> {
     public DOMHorizontalSpacer() {
-        setComponent(new HorizontalSpacer(0, 0));
+        setComponent(new HorizontalSpacer(20, 40));
     }
 }

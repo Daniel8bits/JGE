@@ -1,4 +1,4 @@
-package game.engine.ui.qt;
+package game.engine.ui.qt.layouts;
 
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QHBoxLayout;

@@ -20,9 +20,10 @@ public abstract class DOMQtLayout<T extends ILayoutComponent> extends DOMQtEleme
         });
     }
 
+    @Override
     public void removeFromParentComponent() {
         DOMItem parent = (DOMItem) getParent();
-        if(parent == null) {
+        if(parent == null || getComponent().parent() == null) {
             return;
         }
         if(parent instanceof DOMQtWidget<?>) {

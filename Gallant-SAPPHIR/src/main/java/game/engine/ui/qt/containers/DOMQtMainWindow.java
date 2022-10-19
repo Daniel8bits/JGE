@@ -7,6 +7,7 @@ import game.engine.ui.framework.interfaces.IStates;
 import game.engine.ui.qt.*;
 import game.engine.ui.qt.components.containers.MainWindow;
 import game.engine.ui.qt.components.widgets.Div;
+import game.engine.ui.qt.layouts.ELayoutType;
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QSpacerItem;
@@ -48,6 +49,7 @@ public abstract class DOMQtMainWindow extends DOMContainer<MainWindow>
     protected void whenMounted() {
         val props = (DOMQtMainWindowProps) props();
         if(props.layout != null && props.layout != ELayoutType.NONE) {
+            getChildren().forEach(child -> ((DOMQtElement<?>) child).removeFromParentComponent());
             centralWidget.setLayout(ELayoutType.reduce(props.layout));
             getChildren().forEach(child -> configureLayout((DOMQtElement<?>) child));
         }
@@ -77,7 +79,11 @@ public abstract class DOMQtMainWindow extends DOMContainer<MainWindow>
             QGridLayout gridLayout = (QGridLayout) centralWidget.layout();
             if(cell != null) {
                 domQtWidget.removeFromParentComponent();
-                gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addWidget((QWidget) domQtWidget.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }
@@ -92,7 +98,11 @@ public abstract class DOMQtMainWindow extends DOMContainer<MainWindow>
             QGridLayout gridLayout = (QGridLayout) getContainer().layout();
             if(cell != null) {
                 domQtLayout.removeFromParentComponent();
-                gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addLayout((QLayout) domQtLayout.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }
@@ -107,7 +117,11 @@ public abstract class DOMQtMainWindow extends DOMContainer<MainWindow>
             QGridLayout gridLayout = (QGridLayout) centralWidget.layout();
             if(cell != null) {
                 domQtSpacer.removeFromParentComponent();
-                gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                if(cell.length > 2) {
+                    gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1], cell[2], cell[3]);
+                } else {
+                    gridLayout.addItem((QSpacerItem) domQtSpacer.getComponent(), cell[0], cell[1]);
+                }
             }
             return;
         }

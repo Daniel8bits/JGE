@@ -1,6 +1,7 @@
 package game.engine.ui.dom.nodes;
 
 import game.engine.ui.dom.DOMTemplate;
+import game.engine.ui.dom.Sapphire;
 import game.engine.ui.framework.StateManager;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
@@ -9,7 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Node;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 public abstract class DOMItem extends DOMNode<DOMItem> {
@@ -22,9 +25,12 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
 
     private final int MAX_UPDATE_CYCLES = 100;
     private int updateCycles;
+    private boolean shouldUpdate, alreadyUpdating;
+    private Queue<String> stateChangingQueue;
 
     public void init(IProps props, String hierarchyName) {
         this.hierarchyName = hierarchyName;
+        stateChangingQueue = new LinkedList<>();
         this.stateManager = new StateManager(this, props, defaultStates);
         this.updateCycles = 0;
     }
@@ -52,8 +58,10 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
         fn.accept(states);
         set(states);
     }
-
+/*
     private void doUpdates() {
+        if(alreadyUpdating) return;
+        alreadyUpdating = true;
         if(updateCycles == MAX_UPDATE_CYCLES) {
             throw new RuntimeException("Max update cycles was reached!");
         }
@@ -64,6 +72,27 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
             //setup();
         }
     }
+*/
+    private void doUpdates() {
+        shouldUpdate = Boolean.TRUE;
+        if(alreadyUpdating) return;
+        alreadyUpdating = Boolean.TRUE;
+
+        while(shouldUpdate) {
+            shouldUpdate = Boolean.FALSE;
+            reconciliate();
+            whenUpdated(stateManager.getPreviousProps(), stateManager.getPreviousState());
+        }
+        alreadyUpdating = Boolean.FALSE;
+    }
+
+    public abstract void callWhenMounted();
+    public void callWhenUpdated(DOMTemplate template) {
+        stateManager.setProps(new Sapphire().newProps(template));
+        doUpdates();
+    }
+    public abstract void callWhenUnmounted();
+    public abstract void reconciliate();
 
     protected StateManager getStateManager() {
         return stateManager;
@@ -106,4 +135,5 @@ public abstract class DOMItem extends DOMNode<DOMItem> {
     protected DOMTemplate $(Class<? extends DOMItem> type, Consumer<IProps> props, DOMTemplate ...children) {
         return new DOMTemplate(type, props, children);
     }
+
 }

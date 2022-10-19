@@ -6,6 +6,7 @@ import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
 import game.engine.ui.framework.interfaces.IStates;
 import game.engine.ui.qt.components.IWidgetComponent;
+import game.engine.ui.qt.layouts.ELayoutType;
 import io.qt.widgets.QGridLayout;
 import io.qt.widgets.QLayout;
 import io.qt.widgets.QSpacerItem;
@@ -49,9 +50,10 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
         }
     }
 
+    @Override
     public void removeFromParentComponent() {
         DOMItem parent = (DOMItem) getParent();
-        if(parent == null) {
+        if(parent == null || getComponent().parent() == null) {
             return;
         }
         if(parent instanceof DOMQtWidget<?>) {
@@ -77,6 +79,7 @@ public abstract class DOMQtWidget<T extends IWidgetComponent> extends DOMQtEleme
     protected void whenMounted() {
         val props = (DOMQtWidgetProps) props();
         if(props.layout != null && props.layout != ELayoutType.NONE) {
+            getChildren().forEach(child -> ((DOMQtElement<?>) child).removeFromParentComponent());
             getComponent().setLayout(ELayoutType.reduce(props.layout));
             getChildren().forEach(child -> configureLayout((DOMQtElement<?>) child));
         }

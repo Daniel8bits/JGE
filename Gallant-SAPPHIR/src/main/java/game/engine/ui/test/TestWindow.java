@@ -3,7 +3,7 @@ package game.engine.ui.test;
 import game.engine.ui.dom.DOMTemplate;
 import game.engine.ui.qt.DOMQtElement;
 import game.engine.ui.qt.DOMQtWidget;
-import game.engine.ui.qt.ELayoutType;
+import game.engine.ui.qt.layouts.ELayoutType;
 import game.engine.ui.qt.containers.DOMQtMainWindow;
 import game.engine.ui.qt.elements.DOMButtonElement;
 import game.engine.ui.qt.elements.DOMDivElement;
@@ -16,50 +16,38 @@ public class TestWindow extends DOMQtMainWindow {
     @Override
     protected DOMTemplate body() {
         return
-        $(DOMDivElement.class,
-            (props -> {
+        $(DOMDivElement.class, (props) -> {
                 val p = (DOMQtWidget.DOMQtWidgetProps) props;
                 p.layout = ELayoutType.GRID_LAYOUT;
+            },
+            $(DOMLabelElement.class, (props) -> {
+                val p = (DOMLabelElement.DOMLabelProps) props;
+                p.value = "Username:";
+                p.cell = new int[] {0, 0};
             }),
-            $(DOMLabelElement.class,
-                (props) -> {
-                    val p = (DOMLabelElement.DOMLabelProps) props;
-                    p.value = "Username:";
-                    p.cell = new int[] {0, 0};
-                }
-            ),
-            $(DOMTextFieldElement.class,
-                (props) -> {
-                    val p = (DOMQtWidget.DOMQtWidgetProps) props;
-                    p.cell = new int[] {0, 1};
-                }
-            ),
-            $(DOMLabelElement.class,
-                (props) -> {
-                    val p = (DOMLabelElement.DOMLabelProps) props;
-                    p.value = "Password:";
-                    p.cell = new int[] {1, 0};
-                }
-            ),
-            $(DOMTextFieldElement.class,
-                (props) -> {
-                    val p = (DOMQtWidget.DOMQtWidgetProps) props;
-                    p.cell = new int[] {1, 1};
-                }
-            ),
-            $(DOMButtonElement.class,
-                (props) -> {
-                    val p = (DOMQtWidget.DOMQtWidgetProps) props;
-                    p.cell = new int[] {2, 0};
-                }
-            ),
+            $(DOMTextFieldElement.class, (props) -> {
+                val p = (DOMQtWidget.DOMQtWidgetProps) props;
+                p.cell = new int[] {0, 1};
+            }),
+            $(DOMLabelElement.class, (props) -> {
+                val p = (DOMLabelElement.DOMLabelProps) props;
+                p.value = "Password:";
+                p.cell = new int[] {1, 0};
+            }),
+            $(DOMTextFieldElement.class, (props) -> {
+                val p = (DOMQtWidget.DOMQtWidgetProps) props;
+                p.cell = new int[] {1, 1};
+            }),
+            $(DOMButtonElement.class, (props) -> {
+                val p = (DOMButtonElement.DOMButtonProps) props;
+                p.cell = new int[] {2, 0};
+                p.label = "Login";
+            }),
             $(TestComponent.class),
-            $(DOMVerticalSpacer.class,
-                (props) -> {
-                    val p = (DOMQtElement.DOMQtElementProps) props;
-                    p.cell = new int[] {3, 0};
-                }
-            )
+            $(DOMVerticalSpacer.class, (props) -> {
+                val p = (DOMQtElement.DOMQtElementProps) props;
+                p.cell = new int[] {3, 0};
+            })
         );
     }
 }

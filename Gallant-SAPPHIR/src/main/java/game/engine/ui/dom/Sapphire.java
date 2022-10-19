@@ -6,6 +6,7 @@ import game.engine.ui.dom.nodes.DOMElement;
 import game.engine.ui.dom.nodes.DOMItem;
 import game.engine.ui.framework.annotations.Props;
 import game.engine.ui.framework.interfaces.IProps;
+import lombok.val;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -84,11 +85,46 @@ public class Sapphire {
         return domElement;
     }
 
-    private IProps newProps(DOMTemplate template) {
+    public boolean areEquals(Object a, Object b) {
+        if(a == null && b == null) {
+            return Boolean.TRUE;
+        }
+        if(a != null && b == null) {
+            return Boolean.FALSE;
+        }
+        if(a == null) {
+            return Boolean.FALSE;
+        }
+
+        if(!a.getClass().isInstance(b)) {
+            return Boolean.FALSE;
+        }
+
+        if(a.getClass().isArray()) {
+            Object[] aAsArray = (Object[]) a;
+            Object[] bAsArray = (Object[]) b;
+            if(aAsArray.length != bAsArray.length) {
+                return Boolean.FALSE;
+            }
+            for(int i = 0; i < aAsArray.length; i++) {
+                if(notEquals(aAsArray[i], bAsArray[i])) {
+                    return Boolean.FALSE;
+                }
+            }
+        }
+
+        return a.equals(b);
+    }
+
+    public boolean notEquals(Object a, Object b) {
+        return !areEquals(a, b);
+    }
+
+    public IProps newProps(DOMTemplate template) {
         return newProps(template.getType(), template.getProps(), template.getChildren());
     }
 
-    private IProps newProps(Class<? extends DOMItem> type, Consumer<IProps> propsConsumer, DOMTemplate[] children) {
+    public IProps newProps(Class<? extends DOMItem> type, Consumer<IProps> propsConsumer, DOMTemplate[] children) {
         AtomicReference<IProps> props = new AtomicReference<>();
 
         Arrays.stream(type.getClasses())

@@ -1,7 +1,7 @@
 package game.engine.ui.test;
 
 import game.engine.ui.dom.Sapphire;
-import game.engine.ui.qt.ELayoutType;
+import game.engine.ui.qt.layouts.ELayoutType;
 import game.engine.ui.qt.containers.DOMQtMainWindow;
 import io.qt.widgets.QApplication;
 import lombok.val;

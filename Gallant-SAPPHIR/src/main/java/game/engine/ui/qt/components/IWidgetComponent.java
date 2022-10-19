@@ -8,7 +8,7 @@ import io.qt.widgets.QLayout;
 import io.qt.widgets.QVBoxLayout;
 import io.qt.widgets.QWidget;
 
-public interface IWidgetComponent extends IComponent {
+public interface IWidgetComponent extends IQtObjectComponent {
     enum LayoutEnum {
         NONE("none"),
         HORIZONTAL("horizontal"),
@@ -60,6 +60,5 @@ public interface IWidgetComponent extends IComponent {
     void setLayout(QLayout layout);
     int width();
     int height();
-    QObject parent();
     void setParent(QWidget qWidget);
 }
